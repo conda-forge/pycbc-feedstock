@@ -15,7 +15,7 @@ source:
     - pycbc-ringinj.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
 
