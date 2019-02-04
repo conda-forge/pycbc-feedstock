@@ -1,5 +1,5 @@
 {% set name = "PyCBC" %}
-{% set version = "1.13.2" %}
+{% set version = "1.13.3" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 91bbe3398a3526132f71f188530b70266781a44a51ae4ed492e51cc0adb3538c
+  sha256: 186fb8b9e015a756df6464dcae69a1053392b187816cbffb5b7e57451403dcf0
   patches:
     # remove symlink to pycbc library path
     - no-gwave.patch
