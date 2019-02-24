@@ -10,7 +10,7 @@ source:
   sha256: 186fb8b9e015a756df6464dcae69a1053392b187816cbffb5b7e57451403dcf0
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
 
@@ -36,7 +36,7 @@ requirements:
     - kombine >=0.8.2
     - ligo-gracedb
     - ligo-segments
-    - lscsoft-glue >=1.59.3
+    - lscsoft-glue >=1.59.3,<2.0a0
     - mako >=1.0.1
     - matplotlib >=1.5.1
     - mpld3 >=0.3
