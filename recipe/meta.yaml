@@ -36,7 +36,7 @@ requirements:
     - kombine >=0.8.2
     - ligo-gracedb
     - ligo-segments
-    - lscsoft-glue >=1.59.3,<2.0a0
+    - lscsoft-glue >=1.59.3
     - mako >=1.0.1
     - matplotlib >=1.5.1
     - mpld3 >=0.3
@@ -215,8 +215,8 @@ about:
   dev_url: https://github.com/gwastro/pycbc/
   doc_url: http://pycbc.org/pycbc/latest/html/
   license: GPLv3
-  license_family: GPL3
-  license_file: '{{ environ["RECIPE_DIR"] }}/LICENSE'
+  license_family: GPL
+  license_file: LICENSE
   summary: Core library to analyze gravitational-wave data, find signals, and study their parameters.
   description: |
     PyCBC is a software package used to explore astrophysical sources
