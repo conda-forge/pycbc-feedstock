@@ -198,7 +198,6 @@ test:
     - pycbc_population_plots --help
     - pycbc_population_rates --help
     - pycbc_randomize_inj_dist_by_optsnr --help
-    - pycbc_ringinj --help
     - pycbc_single_template --help
     - pycbc_single_template_plot --help
     - pycbc_sngl_minifollowup --help
