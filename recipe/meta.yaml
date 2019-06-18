@@ -10,7 +10,7 @@ source:
   sha256: b1b50ee50cf8c5f01acf3cb68a409ef3e76c9ec76150bb1d0687ce4694c197f0
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
 
@@ -48,6 +48,7 @@ requirements:
     - python
     - python-lalframe
     - python-lalsimulation
+    - python-pegasus-wms
     - requests >=1.2.1
     - scipy >=0.16.0,<1.3.0  # [py<35]
     - scipy >=0.16.0  # [py>=35]
