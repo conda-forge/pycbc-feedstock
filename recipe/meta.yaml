@@ -1,5 +1,5 @@
 {% set name = "PyCBC" %}
-{% set version = "1.14.2" %}
+{% set version = "1.14.3" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 338c7ac8499d7f12a040a9ea0fa068859c35510b05f44f8c34923946bd2cf943
+  sha256: 10d96891f4669f97d16e53d0c07586e89a04e9110f50fce1d2629b408e89fd2e
 
 build:
   number: 0
