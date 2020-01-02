@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   skip: true  # [win]
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
+  script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   build:
@@ -29,7 +29,7 @@ requirements:
     - cython
     - decorator >=3.4.2
     - dqsegdb
-    - dqsegdb2
+    - dqsegdb2 >=1.0.1
     - emcee 2.2.1
     - h5py >=2.5
     - jinja2
@@ -52,13 +52,20 @@ requirements:
     - scipy >=0.16.0,<1.3.0  # [py<35]
     - scipy >=0.16.0  # [py>=35]
     - six >=1.10.0
-    - weave  # [py<30]
+    - tqdm
 
 test:
   imports:
     - pycbc
+    - pycbc.bin_utils
+    - pycbc.boundaries
     - pycbc.catalog
+    - pycbc.conversions
+    - pycbc.coordinates
+    - pycbc.cosmology
+    - pycbc.detector
     - pycbc.distributions
+    - pycbc.dq
     - pycbc.events
     - pycbc.fft
     - pycbc.filter
@@ -69,22 +76,32 @@ test:
     - pycbc.inference.sampler
     - pycbc.inject
     - pycbc.io
+    - pycbc.libutils
     - pycbc.noise
+    - pycbc.opt
+    - pycbc.pnutils
+    - pycbc.pool
     - pycbc.population
     - pycbc.psd
+    - pycbc.rate
     - pycbc.results
+    - pycbc.scheme
+    - pycbc.sensitivity
     - pycbc.strain
     - pycbc.tmpltbank
+    - pycbc.transforms
     - pycbc.types
     - pycbc.vetoes
     - pycbc.waveform
     - pycbc.workflow
   requires:
     - fftw
+    - mpi4py
   commands:
     - export MPLBACKEND="agg"
     - pycbc_aligned_bank_cat --help
     - pycbc_aligned_stoch_bank --help
+    - pycbc_apply_rerank --help
     - pycbc_average_psd --help
     - pycbc_bank_verification --help
     - pycbc_banksim --help
@@ -107,9 +124,12 @@ test:
     - pycbc_combine_statmap --help
     - pycbc_compress_bank --help
     - pycbc_condition_strain --help
+    - pycbc_create_html_snippet --help
     - pycbc_create_injections --help
     - pycbc_create_offline_search_workflow --help
+    - pycbc_cut_merge_triggers_to_tmpltbank --help
     - pycbc_dark_vs_bright_injections --help
+    - pycbc_data_store --help
     - pycbc_distribute_background_bins --help
     - pycbc_faithsim --help
     - pycbc_fit_sngl_trigs --help
@@ -117,6 +137,8 @@ test:
     - pycbc_fit_sngls_by_template --help
     - pycbc_fit_sngls_over_multiparam --help
     - pycbc_fit_sngls_over_param --help
+    - pycbc_fit_sngls_split_binned --help
+    - pycbc_followup_file --help
     - pycbc_foreground_censor --help
     - pycbc_foreground_minifollowup --help
     - pycbc_generate_hwinj --help
@@ -126,7 +148,12 @@ test:
     - pycbc_geom_nonspinbank --help
     - pycbc_get_ffinal --help
     - pycbc_get_loudest_params --help
+    - pycbc_grb_inj_combiner --help
+    - pycbc_grb_inj_finder --help
+    - pycbc_grb_trig_cluster --help
+    - pycbc_grb_trig_combiner --help
     - pycbc_hdf5_splitbank --help
+    - pycbc_ifar_catalog --help
     - pycbc_inference --help
     - pycbc_inference_extract_samples --help
     - pycbc_inference_plot_acceptance_rate --help
@@ -140,28 +167,41 @@ test:
     - pycbc_inference_plot_posterior --help
     - pycbc_inference_plot_prior --help
     - pycbc_inference_plot_samples --help
+    - pycbc_inference_plot_thermodynamic_integrand --help
     - pycbc_inference_table_summary --help
     - pycbc_inj_cut --help
     - pycbc_injection_minifollowup --help
     - pycbc_insert_frame_hwinj --help
     - pycbc_inspiral --help
     - pycbc_inspiral_skymax --help
+    - pycbc_live --help
+    - pycbc_live_nagios_monitor --help
     - pycbc_losc_segment_query --help
     - pycbc_make_bank_verifier_workflow --help
     - pycbc_make_banksim --help
     - pycbc_make_coinc_search_workflow --help
     - pycbc_make_faithsim --help
+    #- pycbc_make_grb_summary_page --help
     - pycbc_make_html_page --help
     - pycbc_make_inference_inj_workflow --help
     - pycbc_make_inference_workflow --help
-    - pycbc_make_offline_grb_workflow --help
+    #- pycbc_make_offline_grb_workflow --help
     - pycbc_make_psd_estimation_workflow --help
     - pycbc_make_sbank_workflow --help
     - pycbc_make_uberbank_workflow --help
+    - pycbc_mass_area_plot --help
+    - pycbc_mchirp_plots --help
     - pycbc_merge_psds --help
     - pycbc_multi_inspiral --help
+    - pycbc_multiifo_add_statmap --help
     - pycbc_multiifo_coinc_findtrigs --help
+    - pycbc_multiifo_coinc_statmap --help
+    - pycbc_multiifo_coinc_statmap_inj --help
+    - pycbc_multiifo_combine_statmap --help
+    - pycbc_multiifo_dtphase --help
+    - pycbc_multiifo_exclude_zerolag --help
     - pycbc_optimal_snr --help
+    - pycbc_optimize_snr --help
     - pycbc_page_banktriggerrate --help
     - pycbc_page_coinc_snrchi --help
     - pycbc_page_coincinfo --help
@@ -196,10 +236,19 @@ test:
     - pycbc_plot_throughput --help
     - pycbc_plot_trigger_timeseries --help
     - pycbc_plot_trigrate --help
+    - pycbc_plot_vt_ratio --help
     - pycbc_plot_waveform --help
     - pycbc_population_plots --help
     - pycbc_population_rates --help
+    - pycbc_process_sngls --help
+    - pycbc_pygrb_plot_chisq_veto --help
+    - pycbc_pygrb_plot_coh_ifosnr --help
+    - pycbc_pygrb_plot_skygrid --help
+    - pycbc_pygrb_plot_snr_timeseries --help
+    - pycbc_pygrb_pp_workflow --help
     - pycbc_randomize_inj_dist_by_optsnr --help
+    - pycbc_reduce_template_bank --help
+    - pycbc_rerank_passthrough --help
     - pycbc_single_template --help
     - pycbc_single_template_plot --help
     - pycbc_sngl_minifollowup --help
@@ -207,18 +256,20 @@ test:
     - pycbc_splitbank --help
     - pycbc_stat_dtphase --help
     - pycbc_strip_injections --help
+    #- pycbc_submit_dax --help
     - pycbc_template_recovery_hist --help
     - pycbc_tmpltbank_to_chi_params --help
     - pycbc_upload_xml_to_gracedb --help
+    - run_pycbc_inference --help
 
 about:
-  home: https://pycbc.org/
-  dev_url: https://github.com/gwastro/pycbc/
-  doc_url: http://pycbc.org/pycbc/latest/html/
-  license: GPLv3
-  license_family: GPL
-  license_file: LICENSE
-  summary: Core library to analyze gravitational-wave data, find signals, and study their parameters.
+  home: "https://pycbc.org/"
+  dev_url: "https://github.com/gwastro/pycbc/"
+  doc_url: "http://pycbc.org/pycbc/latest/html/"
+  license: "GPL-3.0-or-later"
+  license_family: "GPL"
+  license_file: "LICENSE"
+  summary: "Core library to analyze gravitational-wave data, find signals, and study their parameters."
   description: |
     PyCBC is a software package used to explore astrophysical sources
     of gravitational waves.
