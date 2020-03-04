@@ -1,18 +1,18 @@
 {% set name = "PyCBC" %}
-{% set version = "1.15.4" %}
+{% set version = "1.15.5" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: dab534fd0e6c62655c6e57e73c8da4d7233671c7fa66e36d42266d4011a71c9a
+  sha256: 43de9008e8202e8ce4fed15e89a5533ec4dd8ad9fbea3ce5cfefa8f0aaf912f9
 
 build:
   number: 0
   skip: true  # [win]
-  script: "{{ PYTHON }} -m pip install . -vv"
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
@@ -265,13 +265,13 @@ test:
     - run_pycbc_inference --help
 
 about:
-  home: "https://pycbc.org/"
-  dev_url: "https://github.com/gwastro/pycbc/"
-  doc_url: "http://pycbc.org/pycbc/latest/html/"
-  license: "GPL-3.0-or-later"
-  license_family: "GPL"
-  license_file: "LICENSE"
-  summary: "Core library to analyze gravitational-wave data, find signals, and study their parameters."
+  home: https://pycbc.org/
+  dev_url: https://github.com/gwastro/pycbc/
+  doc_url: http://pycbc.org/pycbc/latest/html/
+  license: GPL-3.0-or-later
+  license_family: GPL
+  license_file: LICENSE
+  summary: Core library to analyze gravitational-wave data, find signals, and study their parameters.
   description: |
     PyCBC is a software package used to explore astrophysical sources
     of gravitational waves.
