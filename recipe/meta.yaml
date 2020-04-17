@@ -163,10 +163,10 @@ test:
     - pycbc_inference_plot_acl --help
     - pycbc_inference_plot_gelman_rubin --help
     - pycbc_inference_plot_geweke --help
-    - pycbc_inference_plot_inj_intervals --help
     - pycbc_inference_plot_inj_recovery --help
     - pycbc_inference_plot_movie --help
     - pycbc_inference_plot_posterior --help
+    - pycbc_inference_plot_pp --help
     - pycbc_inference_plot_prior --help
     - pycbc_inference_plot_samples --help
     - pycbc_inference_plot_thermodynamic_integrand --help
