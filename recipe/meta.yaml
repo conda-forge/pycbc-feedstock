@@ -12,6 +12,8 @@ source:
 build:
   error_overdepending: true
   error_overlinking: true
+  ignore_run_exports:
+    - python
   number: 0
   skip: true  # [win]
   script: {{ PYTHON }} -m pip install . -vv
