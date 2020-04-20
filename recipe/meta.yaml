@@ -1,25 +1,36 @@
 {% set name = "PyCBC" %}
-{% set version = "1.15.4" %}
+{% set version = "1.15.5" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: dab534fd0e6c62655c6e57e73c8da4d7233671c7fa66e36d42266d4011a71c9a
+  sha256: 43de9008e8202e8ce4fed15e89a5533ec4dd8ad9fbea3ce5cfefa8f0aaf912f9
+  patches:
+    - openmp-macos.patch
 
 build:
+  error_overdepending: true
+  error_overlinking: true
+  ignore_run_exports:
+    - python
   number: 0
   skip: true  # [win]
-  script: "{{ PYTHON }} -m pip install . -vv"
+  script:
+    - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
+    - {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - llvm-openmp  # [osx]
   host:
     - cython
+    - libgomp  # [linux]
+    - llvm-openmp  # [osx]
     - numpy 1.16
     - pip
     - python
@@ -32,11 +43,13 @@ requirements:
     - dqsegdb
     - dqsegdb2 >=1.0.1
     - emcee 2.2.1
+    - gwdatafind
     - h5py >=2.5
     - jinja2
     - kombine >=0.8.2
     - ligo-gracedb
     - ligo-segments
+    - llvm-openmp  # [osx]
     - lscsoft-glue >=1.59.3
     - mako >=1.0.1
     - matplotlib-base >=1.5.1
@@ -96,6 +109,7 @@ test:
     - pycbc.waveform
     - pycbc.workflow
   requires:
+    - epsie
     - fftw
     - mpi4py
     - openssh
@@ -163,10 +177,10 @@ test:
     - pycbc_inference_plot_acl --help
     - pycbc_inference_plot_gelman_rubin --help
     - pycbc_inference_plot_geweke --help
-    - pycbc_inference_plot_inj_intervals --help
     - pycbc_inference_plot_inj_recovery --help
     - pycbc_inference_plot_movie --help
     - pycbc_inference_plot_posterior --help
+    - pycbc_inference_plot_pp --help
     - pycbc_inference_plot_prior --help
     - pycbc_inference_plot_samples --help
     - pycbc_inference_plot_thermodynamic_integrand --help
@@ -265,13 +279,13 @@ test:
     - run_pycbc_inference --help
 
 about:
-  home: "https://pycbc.org/"
-  dev_url: "https://github.com/gwastro/pycbc/"
-  doc_url: "http://pycbc.org/pycbc/latest/html/"
-  license: "GPL-3.0-or-later"
-  license_family: "GPL"
-  license_file: "LICENSE"
-  summary: "Core library to analyze gravitational-wave data, find signals, and study their parameters."
+  home: https://pycbc.org/
+  dev_url: https://github.com/gwastro/pycbc/
+  doc_url: http://pycbc.org/pycbc/latest/html/
+  license: GPL-3.0-or-later
+  license_family: GPL
+  license_file: LICENSE
+  summary: Core library to analyze gravitational-wave data, find signals, and study their parameters.
   description: |
     PyCBC is a software package used to explore astrophysical sources
     of gravitational waves.
