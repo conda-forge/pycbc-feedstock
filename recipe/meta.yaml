@@ -97,6 +97,7 @@ test:
     - pycbc.waveform
     - pycbc.workflow
   requires:
+    - epsie
     - fftw
     - mpi4py
     - openssh
