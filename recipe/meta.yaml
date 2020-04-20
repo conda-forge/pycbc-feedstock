@@ -10,6 +10,8 @@ source:
   sha256: 43de9008e8202e8ce4fed15e89a5533ec4dd8ad9fbea3ce5cfefa8f0aaf912f9
 
 build:
+  error_overdepending: true
+  error_overlinking: true
   number: 0
   skip: true  # [win]
   script: {{ PYTHON }} -m pip install . -vv
@@ -20,6 +22,7 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - cython
+    - libgomp  # [linux]
     - numpy 1.16
     - pip
     - python
