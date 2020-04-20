@@ -8,6 +8,8 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 43de9008e8202e8ce4fed15e89a5533ec4dd8ad9fbea3ce5cfefa8f0aaf912f9
+  patches:
+    - openmp-macos.patch
 
 build:
   error_overdepending: true
@@ -16,15 +18,19 @@ build:
     - python
   number: 0
   skip: true  # [win]
-  script: {{ PYTHON }} -m pip install . -vv
+  script:
+    - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
+    - {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - llvm-openmp  # [osx]
   host:
     - cython
     - libgomp  # [linux]
+    - llvm-openmp  # [osx]
     - numpy 1.16
     - pip
     - python
@@ -43,6 +49,7 @@ requirements:
     - kombine >=0.8.2
     - ligo-gracedb
     - ligo-segments
+    - llvm-openmp  # [osx]
     - lscsoft-glue >=1.59.3
     - mako >=1.0.1
     - matplotlib-base >=1.5.1
