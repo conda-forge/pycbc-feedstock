@@ -1,5 +1,5 @@
 {% set name = "PyCBC" %}
-{% set version = "1.16.0" %}
+{% set version = "1.16.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 2c505a1415c7572f8c5e02b08161ee578e453cc16d3a7c97c61dd006015d7260
+  sha256: f99934a008c05ae9c544b7f4d3e435e3de93579dcff924f196789406b182edd9
   patches:
     - openmp-macos.patch
 
