@@ -5,9 +5,13 @@ Home: https://pycbc.org/
 
 Package license: GPL-3.0-or-later
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/pycbc-feedstock/blob/master/LICENSE.txt)
 
 Summary: Core library to analyze gravitational-wave data, find signals, and study their parameters.
+
+Development: https://github.com/gwastro/pycbc/
+
+Documentation: http://pycbc.org/pycbc/latest/html/
 
 PyCBC is a software package used to explore astrophysical sources
 of gravitational waves.
