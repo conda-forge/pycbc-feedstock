@@ -16,7 +16,7 @@ build:
   error_overlinking: true
   ignore_run_exports:
     - python
-  number: 0
+  number: 1
   skip: true  # [win]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
