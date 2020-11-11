@@ -54,7 +54,7 @@ requirements:
     - mako >=1.0.1
     - matplotlib-base >=1.5.1
     - mpld3 >=0.3
-    - {{ pin_compatible('numpy', upper_bound='1.19.0a0') }}
+    - {{ pin_compatible('numpy') }},!=1.19.0
     - pkg-config
     - pillow
     - python
