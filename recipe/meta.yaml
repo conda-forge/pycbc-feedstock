@@ -16,7 +16,7 @@ build:
   error_overlinking: true
   ignore_run_exports:
     - python
-  number: 0
+  number: 1
   skip: true  # [win]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
@@ -31,7 +31,7 @@ requirements:
     - cython
     - libgomp  # [linux]
     - llvm-openmp  # [osx]
-    - numpy 1.16
+    - numpy
     - pip
     - python
     - setuptools
@@ -54,7 +54,8 @@ requirements:
     - mako >=1.0.1
     - matplotlib-base >=1.5.1
     - mpld3 >=0.3
-    - {{ pin_compatible('numpy', upper_bound='1.19.0a0') }}
+    - {{ pin_compatible('numpy') }}
+    - numpy !=1.19.0
     - pkg-config
     - pillow
     - python
