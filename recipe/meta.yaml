@@ -31,7 +31,7 @@ requirements:
     - cython
     - libgomp  # [linux]
     - llvm-openmp  # [osx]
-    - numpy 1.16
+    - numpy
     - pip
     - python
     - setuptools
