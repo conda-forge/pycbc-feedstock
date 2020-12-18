@@ -1,5 +1,5 @@
 {% set name = "PyCBC" %}
-{% set version = "1.16.11" %}
+{% set version = "1.17.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 8e2491bec671fdc44cb48a63850a199daffb35adc88ecd557de53fc68890eb50
+  sha256: 7089e9acaed17a26c02a0bd17b8eda7e3d0367de12fa4d3d1b570b1519033fe8
   patches:
     - openmp-macos.patch
 
@@ -16,7 +16,7 @@ build:
   error_overlinking: true
   ignore_run_exports:
     - python
-  number: 1
+  number: 0
   skip: true  # [win]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
