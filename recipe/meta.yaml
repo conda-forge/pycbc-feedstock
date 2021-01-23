@@ -208,13 +208,13 @@ test:
     - pycbc_mchirp_plots --help
     - pycbc_merge_psds --help
     - pycbc_multi_inspiral --help
-    - pycbc_multiifo_add_statmap --help
-    - pycbc_multiifo_coinc_findtrigs --help
-    - pycbc_multiifo_coinc_statmap --help
-    - pycbc_multiifo_coinc_statmap_inj --help
-    - pycbc_multiifo_combine_statmap --help
-    - pycbc_multiifo_dtphase --help
-    - pycbc_multiifo_exclude_zerolag --help
+    - pycbc_add_statmap --help
+    - pycbc_coinc_findtrigs --help
+    - pycbc_coinc_statmap --help
+    - pycbc_coinc_statmap_inj --help
+    - pycbc_combine_statmap --help
+    - pycbc_dtphase --help
+    - pycbc_exclude_zerolag --help
     - pycbc_optimal_snr --help
     - pycbc_optimize_snr --help
     - pycbc_page_banktriggerrate --help
