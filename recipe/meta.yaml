@@ -1,5 +1,5 @@
 {% set name = "PyCBC" %}
-{% set version = "1.16.12" %}
+{% set version = "1.17.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: af421c1a96f4ee160d046cc726176045229951bebd1815d2acdec63cc82e1862
+  sha256: 7089e9acaed17a26c02a0bd17b8eda7e3d0367de12fa4d3d1b570b1519033fe8
   patches:
     - openmp-macos.patch
 
@@ -16,7 +16,7 @@ build:
   error_overlinking: true
   ignore_run_exports:
     - python
-  number: 2
+  number: 0
   skip: true  # [win]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
@@ -141,7 +141,7 @@ test:
     - pycbc_condition_strain --help
     - pycbc_create_html_snippet --help
     - pycbc_create_injections --help
-    - pycbc_create_offline_search_workflow --help
+    - pycbc_make_coinc_search_workflow --help
     - pycbc_cut_merge_triggers_to_tmpltbank --help
     - pycbc_dark_vs_bright_injections --help
     - pycbc_data_store --help
@@ -208,13 +208,13 @@ test:
     - pycbc_mchirp_plots --help
     - pycbc_merge_psds --help
     - pycbc_multi_inspiral --help
-    - pycbc_multiifo_add_statmap --help
-    - pycbc_multiifo_coinc_findtrigs --help
-    - pycbc_multiifo_coinc_statmap --help
-    - pycbc_multiifo_coinc_statmap_inj --help
-    - pycbc_multiifo_combine_statmap --help
-    - pycbc_multiifo_dtphase --help
-    - pycbc_multiifo_exclude_zerolag --help
+    - pycbc_add_statmap --help
+    - pycbc_coinc_findtrigs --help
+    - pycbc_coinc_statmap --help
+    - pycbc_coinc_statmap_inj --help
+    - pycbc_combine_statmap --help
+    - pycbc_dtphase --help
+    - pycbc_exclude_zerolag --help
     - pycbc_optimal_snr --help
     - pycbc_optimize_snr --help
     - pycbc_page_banktriggerrate --help
