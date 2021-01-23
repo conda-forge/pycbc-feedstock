@@ -61,7 +61,7 @@ requirements:
     - python
     - python-lalframe
     - python-lalsimulation
-    - python-pegasus-wms
+    - python-pegasus-wms 4
     - requests >=1.2.1
     - scipy >=0.16.0
     - six >=1.10.0
