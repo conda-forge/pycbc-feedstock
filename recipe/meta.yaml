@@ -10,14 +10,17 @@ source:
   sha256: 0519dda6d3a549621ec638a87eb2a0e8be4a4b50e9bc050bd1aaec3adab3054a
   patches:
     - openmp-macos.patch
+    # remove lalsuite requirement from python metadata
     - no-install_requires-lalsuite.patch
+    # update numpy requirements in python metadata to match conda
+    - numpy-requirement.patch
 
 build:
   error_overdepending: true
   error_overlinking: true
   ignore_run_exports:
     - python
-  number: 0
+  number: 1
   skip: true  # [win]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
@@ -112,7 +115,11 @@ test:
     - fftw
     - mpi4py
     - openssh
+    - pip
   commands:
+    # check requirements with pip
+    - python -m pip check
+    # test scripts
     - export MPLBACKEND="agg"
     - pycbc_aligned_bank_cat --help
     - pycbc_aligned_stoch_bank --help
