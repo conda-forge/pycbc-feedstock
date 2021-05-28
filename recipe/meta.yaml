@@ -1,5 +1,5 @@
 {% set name = "PyCBC" %}
-{% set version = "1.18.0" %}
+{% set version = "1.18.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 0519dda6d3a549621ec638a87eb2a0e8be4a4b50e9bc050bd1aaec3adab3054a
+  sha256: 8306e08feb0d052015013eefda1a252c3e325045de30d614862160f73564fda8
   patches:
     - openmp-macos.patch
     # remove lalsuite requirement from python metadata
@@ -20,7 +20,7 @@ build:
   error_overlinking: true
   ignore_run_exports:
     - python
-  number: 1
+  number: 0
   skip: true  # [win]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
