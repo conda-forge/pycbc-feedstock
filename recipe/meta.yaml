@@ -12,8 +12,6 @@ source:
     - openmp-macos.patch
     # remove lalsuite requirement from python metadata
     - no-install_requires-lalsuite.patch
-    # update numpy requirements in python metadata to match conda
-    - numpy-requirement.patch
 
 build:
   error_overdepending: true
