@@ -9,9 +9,12 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 05030790aa00b6c7476ed404f6e38016544fab3b2ef8a9ba2fe2f042a0fe7ad3
   patches:
-    - openmp-macos.patch
     # remove lalsuite requirement from python metadata
     - no-install_requires-lalsuite.patch
+    # enable openmp on all platforms
+    - openmp-macos.patch
+    # https://github.com/gwastro/pycbc/pull/3822
+    - intrinsics.patch
 
 build:
   error_overdepending: true
