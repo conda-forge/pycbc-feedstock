@@ -121,6 +121,7 @@ test:
     - mpi4py
     - openssh
     - pip
+    - python-ligo-lw
   commands:
     # check requirements with pip
     - python -m pip check
