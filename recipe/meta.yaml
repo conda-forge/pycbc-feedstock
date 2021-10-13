@@ -9,14 +9,20 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 05030790aa00b6c7476ed404f6e38016544fab3b2ef8a9ba2fe2f042a0fe7ad3
   patches:
-    - openmp-macos.patch
     # remove lalsuite requirement from python metadata
     - no-install_requires-lalsuite.patch
+    # enable openmp on all platforms
+    - openmp-macos.patch
+    # https://github.com/gwastro/pycbc/pull/3822
+    - intrinsics.patch
 
 build:
   error_overdepending: true
   error_overlinking: true
   ignore_run_exports:
+    # not sure why, bot osx-arm64 for python3.9, libcxx isn't
+    # linked in the compiled extension modules
+    - libcxx  # [osx and arm64 and py>=39]
     - python
   number: 0
   skip: true  # [win]
@@ -26,6 +32,10 @@ build:
 
 requirements:
   build:
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - cython                                 # [build_platform != target_platform]
+    - numpy                                  # [build_platform != target_platform]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - llvm-openmp  # [osx]
@@ -114,6 +124,7 @@ test:
     - mpi4py
     - openssh
     - pip
+    - python-ligo-lw
   commands:
     # check requirements with pip
     - python -m pip check
