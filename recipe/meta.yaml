@@ -24,7 +24,7 @@ build:
     # linked in the compiled extension modules
     - libcxx  # [osx and arm64 and py>=39]
     - python
-  number: 0
+  number: 1
   skip: true  # [win]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
