@@ -1,5 +1,5 @@
 {% set name = "PyCBC" %}
-{% set version = "1.18.3" %}
+{% set version = "2.0.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 05030790aa00b6c7476ed404f6e38016544fab3b2ef8a9ba2fe2f042a0fe7ad3
+  sha256: 6edf48bb12b8e426629b732d1256f6837ccef439feac8409ded30eea9afa6cf3
   patches:
     # remove lalsuite requirement from python metadata
     - no-install_requires-lalsuite.patch
@@ -24,7 +24,7 @@ build:
     # linked in the compiled extension modules
     - libcxx  # [osx and arm64 and py>=39]
     - python
-  number: 1
+  number: 0
   skip: true  # [win]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
