@@ -24,6 +24,9 @@ build:
     - python
   number: 0
   skip: true  # [win]
+  # pegasus-wms cannot be deployed on python 3.10 for conda-forge
+  # see https://github.com/pegasus-isi/pegasus/pull/35
+  skip: true  # [py>=310]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
     - {{ PYTHON }} -m pip install . -vv
@@ -70,7 +73,7 @@ requirements:
     - python
     - python-lalframe
     - python-lalsimulation
-    - python-pegasus-wms 4
+    - pegasus-wms >=5.0.1
     - requests >=1.2.1
     - scipy >=0.16.0
     - six >=1.10.0
