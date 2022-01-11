@@ -13,8 +13,6 @@ source:
     - no-install_requires-lalsuite.patch
     # enable openmp on all platforms
     - openmp-macos.patch
-    # https://github.com/gwastro/pycbc/pull/3822
-    - intrinsics.patch
 
 build:
   error_overdepending: true

@@ -1,12 +1,12 @@
 diff --git a/setup.py b/setup.py
-index 33020232..43240d0e 100755
+index 4003c7556..6885b1b81 100755
 --- a/setup.py
 +++ b/setup.py
-@@ -46,7 +46,6 @@ install_requires =  setup_requires + ['Mako>=1.0.1',
+@@ -44,7 +44,6 @@ install_requires =  setup_requires + ['Mako>=1.0.1',
                        'pillow',
-                       'h5py>=2.5',
+                       'h5py>=2.10',
                        'jinja2',
--                      'lalsuite',
-                       'astropy>=2.0.3,<3.0.0; python_version <= "2.7"',
-                       'astropy>=2.0.3; python_version > "3.0"',
+-                      'lalsuite!=7.2',
+                       'astropy>=2.0.3,!=4.2.1,!=4.0.5',
                        'mpld3>=0.3',
+                       'lscsoft-glue>=1.59.3',
