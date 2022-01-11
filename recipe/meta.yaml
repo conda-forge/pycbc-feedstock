@@ -56,15 +56,14 @@ requirements:
     - dqsegdb
     - dqsegdb2 >=1.0.1
     - gwdatafind
-    - h5py >=2.5
+    - h5py >=2.10
     - jinja2
-    - kombine >=0.8.2
     - ligo-gracedb
     - ligo-segments
     - llvm-openmp  # [osx]
     - lscsoft-glue >=1.59.3
     - mako >=1.0.1
-    - matplotlib-base >=1.5.1
+    - matplotlib-base >=2.0.0
     - mpld3 >=0.3
     - {{ pin_compatible('numpy') }}
     - numpy !=1.19.0
@@ -78,6 +77,9 @@ requirements:
     - scipy >=0.16.0
     - six >=1.10.0
     - tqdm
+  run_constrained:
+    # https://github.com/gwastro/pycbc/pull/3901#issuecomment-993519319
+    - liblalmetaio !=2.1.0
 
 test:
   imports:
