@@ -1,5 +1,5 @@
 {% set name = "PyCBC" %}
-{% set version = "1.18.3" %}
+{% set version = "2.0.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,14 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 05030790aa00b6c7476ed404f6e38016544fab3b2ef8a9ba2fe2f042a0fe7ad3
+  sha256: 6edf48bb12b8e426629b732d1256f6837ccef439feac8409ded30eea9afa6cf3
   patches:
     # remove lalsuite requirement from python metadata
     - no-install_requires-lalsuite.patch
     # enable openmp on all platforms
     - openmp-macos.patch
-    # https://github.com/gwastro/pycbc/pull/3822
-    - intrinsics.patch
 
 build:
   error_overdepending: true
@@ -24,8 +22,11 @@ build:
     # linked in the compiled extension modules
     - libcxx  # [osx and arm64 and py>=39]
     - python
-  number: 1
+  number: 0
   skip: true  # [win]
+  # pegasus-wms cannot be deployed on python 3.10 for conda-forge
+  # see https://github.com/pegasus-isi/pegasus/pull/35
+  skip: true  # [py>=310]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
     - {{ PYTHON }} -m pip install . -vv
@@ -55,15 +56,14 @@ requirements:
     - dqsegdb
     - dqsegdb2 >=1.0.1
     - gwdatafind
-    - h5py >=2.5
+    - h5py >=2.10
     - jinja2
-    - kombine >=0.8.2
     - ligo-gracedb
     - ligo-segments
     - llvm-openmp  # [osx]
     - lscsoft-glue >=1.59.3
     - mako >=1.0.1
-    - matplotlib-base >=1.5.1
+    - matplotlib-base >=2.0.0
     - mpld3 >=0.3
     - {{ pin_compatible('numpy') }}
     - numpy !=1.19.0
@@ -72,11 +72,14 @@ requirements:
     - python
     - python-lalframe
     - python-lalsimulation
-    - python-pegasus-wms 4
+    - pegasus-wms >=5.0.1
     - requests >=1.2.1
     - scipy >=0.16.0
     - six >=1.10.0
     - tqdm
+  run_constrained:
+    # https://github.com/gwastro/pycbc/pull/3901#issuecomment-993519319
+    - liblalmetaio !=2.1.0
 
 test:
   imports:

@@ -1,5 +1,5 @@
 diff --git a/pycbc/events/simd_threshold_ccode.cpp b/pycbc/events/simd_threshold_ccode.cpp
-index 95a05549..ef3ac630 100644
+index 95a055496..ef3ac6307 100644
 --- a/pycbc/events/simd_threshold_ccode.cpp
 +++ b/pycbc/events/simd_threshold_ccode.cpp
 @@ -48,9 +48,7 @@
@@ -14,7 +14,7 @@ index 95a05549..ef3ac630 100644
  #include <complex>
  #include <math.h> // For M_SQRT2
 diff --git a/pycbc/filter/simd_correlate_ccode.cpp b/pycbc/filter/simd_correlate_ccode.cpp
-index 5746cb02..ab19fe63 100644
+index 07a2a7420..1ad8e2cb4 100644
 --- a/pycbc/filter/simd_correlate_ccode.cpp
 +++ b/pycbc/filter/simd_correlate_ccode.cpp
 @@ -32,9 +32,7 @@
@@ -25,6 +25,6 @@ index 5746cb02..ab19fe63 100644
 -    #include <omp.h>
 -#endif
 +#include <omp.h>
- #include <x86intrin.h>
  
- #ifdef __AVX2__
+ #if (defined(__x86_64__) || defined(__i386__))
+     #include <x86intrin.h>
