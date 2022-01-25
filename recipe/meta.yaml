@@ -9,6 +9,9 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 6edf48bb12b8e426629b732d1256f6837ccef439feac8409ded30eea9afa6cf3
   patches:
+    # skip regenerating the git_version_info
+    # https://github.com/gwastro/pycbc/issues/3917
+    - skip-generate_git_version_info.patch
     # remove lalsuite requirement from python metadata
     - no-install_requires-lalsuite.patch
     # enable openmp on all platforms
@@ -22,7 +25,7 @@ build:
     # linked in the compiled extension modules
     - libcxx  # [osx and arm64 and py>=39]
     - python
-  number: 0
+  number: 1
   skip: true  # [win]
   # pegasus-wms cannot be deployed on python 3.10 for conda-forge
   # see https://github.com/pegasus-isi/pegasus/pull/35
