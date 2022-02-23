@@ -16,6 +16,8 @@ source:
     - no-install_requires-lalsuite.patch
     # enable openmp on all platforms
     - openmp-macos.patch
+    # https://github.com/gwastro/pycbc/commit/38fb7f3
+    - pegasus-wms.api.patch
 
 build:
   error_overdepending: true
@@ -25,11 +27,8 @@ build:
     # linked in the compiled extension modules
     - libcxx  # [osx and arm64 and py>=39]
     - python
-  number: 1
+  number: 2
   skip: true  # [win]
-  # pegasus-wms cannot be deployed on python 3.10 for conda-forge
-  # see https://github.com/pegasus-isi/pegasus/pull/35
-  skip: true  # [py>=310]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
     - {{ PYTHON }} -m pip install . -vv
@@ -70,12 +69,12 @@ requirements:
     - mpld3 >=0.3
     - {{ pin_compatible('numpy') }}
     - numpy !=1.19.0
+    - pegasus-wms.api >=5.0.1
     - pkg-config
     - pillow
     - python
     - python-lalframe
     - python-lalsimulation
-    - pegasus-wms >=5.0.1
     - requests >=1.2.1
     - scipy >=0.16.0
     - six >=1.10.0
