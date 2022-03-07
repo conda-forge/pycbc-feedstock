@@ -16,8 +16,6 @@ source:
     - no-install_requires-lalsuite.patch
     # enable openmp on all platforms
     - openmp-macos.patch
-    # https://github.com/gwastro/pycbc/commit/38fb7f3
-    - pegasus-wms.api.patch
 
 build:
   error_overdepending: true
