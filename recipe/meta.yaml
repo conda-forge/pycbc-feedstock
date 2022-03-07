@@ -1,5 +1,5 @@
 {% set name = "PyCBC" %}
-{% set version = "2.0.1" %}
+{% set version = "2.0.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 6edf48bb12b8e426629b732d1256f6837ccef439feac8409ded30eea9afa6cf3
+  sha256: def0f7abd0e40ddc211b98475ce218936477ceb3565110a0b6419c90f4654182
   patches:
     # skip regenerating the git_version_info
     # https://github.com/gwastro/pycbc/issues/3917
@@ -16,8 +16,6 @@ source:
     - no-install_requires-lalsuite.patch
     # enable openmp on all platforms
     - openmp-macos.patch
-    # https://github.com/gwastro/pycbc/commit/38fb7f3
-    - pegasus-wms.api.patch
 
 build:
   error_overdepending: true
@@ -27,7 +25,7 @@ build:
     # linked in the compiled extension modules
     - libcxx  # [osx and arm64 and py>=39]
     - python
-  number: 2
+  number: 0
   skip: true  # [win]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
