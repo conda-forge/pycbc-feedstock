@@ -130,6 +130,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-pycbc-green.svg)](https://anaconda.org/conda-forge/pycbc) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pycbc.svg)](https://anaconda.org/conda-forge/pycbc) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/pycbc.svg)](https://anaconda.org/conda-forge/pycbc) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/pycbc.svg)](https://anaconda.org/conda-forge/pycbc) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-pycbc--live-green.svg)](https://anaconda.org/conda-forge/pycbc-live) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pycbc-live.svg)](https://anaconda.org/conda-forge/pycbc-live) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/pycbc-live.svg)](https://anaconda.org/conda-forge/pycbc-live) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/pycbc-live.svg)](https://anaconda.org/conda-forge/pycbc-live) |
 
 Installing pycbc
 ================
@@ -141,10 +142,10 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `pycbc` can be installed with:
+Once the `conda-forge` channel has been enabled, `pycbc, pycbc-live` can be installed with:
 
 ```
-conda install pycbc
+conda install pycbc pycbc-live
 ```
 
 It is possible to list all of the versions of `pycbc` available on your platform with:

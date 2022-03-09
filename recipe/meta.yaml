@@ -25,7 +25,7 @@ build:
     # linked in the compiled extension modules
     - libcxx  # [osx and arm64 and py>=39]
     - python
-  number: 0
+  number: 1
   skip: true  # [win]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
@@ -73,8 +73,10 @@ requirements:
     - python
     - python-lalframe
     - python-lalsimulation
+    - python-ligo-lw >=1.7.0
     - requests >=1.2.1
     - scipy >=0.16.0
+    - setuptools
     - six >=1.10.0
     - tqdm
   run_constrained:
@@ -124,10 +126,7 @@ test:
   requires:
     - epsie
     - fftw
-    - mpi4py
-    - openssh
     - pip
-    - python-ligo-lw
   commands:
     # check requirements with pip
     - python -m pip check
@@ -208,8 +207,6 @@ test:
     - pycbc_insert_frame_hwinj --help
     - pycbc_inspiral --help
     - pycbc_inspiral_skymax --help
-    - pycbc_live --help
-    - pycbc_live_nagios_monitor --help
     - pycbc_losc_segment_query --help
     - pycbc_make_bank_verifier_workflow --help
     - pycbc_make_banksim --help
@@ -295,6 +292,37 @@ test:
     - pycbc_tmpltbank_to_chi_params --help
     - pycbc_upload_xml_to_gracedb --help
     - run_pycbc_inference --help
+
+outputs:
+  - name: pycbc
+
+  - name: pycbc-live
+    requirements:
+      host:
+        - python
+      run:
+        - mpi4py
+        - {{ pin_subpackage('pycbc', exact=True) }}
+        - python
+        - setproctitle
+    test:
+      requires:
+        - openssh
+      commands:
+        - pycbc_live --help
+        - pycbc_live_nagios_monitor --help
+    about:
+      summary: Low-latency search for gravitational waves based on PyCBC
+      description: |
+        PyCBC Live is a software designed to analyze data from gravitational-wave detectors
+        (such as LIGO, Virgo and KAGRA) and detect transient gravitational-wave signals
+        produced by the coalescences of compact objects (black holes and neutron stars).
+        It is designed to report such signals with a latency below tens of seconds, with
+        the goal of producing rapid alerts for other observatories.
+        It is based on the more general PyCBC software.
+        Relevant scientific publications are
+        [arXiv:1805.11174](https://arxiv.org/abs/1805.11174) and
+        [arXiv:2008.07494](https://arxiv.org/abs/2008.07494).
 
 about:
   home: https://pycbc.org/
