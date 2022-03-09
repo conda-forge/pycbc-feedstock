@@ -76,6 +76,7 @@ requirements:
     - python-ligo-lw >=1.7.0
     - requests >=1.2.1
     - scipy >=0.16.0
+    - setuptools
     - six >=1.10.0
     - tqdm
   run_constrained:
