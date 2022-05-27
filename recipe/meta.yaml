@@ -21,9 +21,9 @@ build:
   error_overdepending: true
   error_overlinking: true
   ignore_run_exports:
-    # not sure why, bot osx-arm64 for python3.9, libcxx isn't
+    # not sure why, on osx-arm64 libcxx isn't
     # linked in the compiled extension modules
-    - libcxx  # [osx and arm64 and py>=39]
+    - libcxx  # [osx and arm64]
     # not directly linked
     - numpy
     - python
