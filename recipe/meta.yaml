@@ -24,6 +24,8 @@ build:
     # not sure why, bot osx-arm64 for python3.9, libcxx isn't
     # linked in the compiled extension modules
     - libcxx  # [osx and arm64 and py>=39]
+    # not directly linked
+    - numpy
     - python
   number: 0
   skip: true  # [win]
