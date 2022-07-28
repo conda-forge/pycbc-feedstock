@@ -131,6 +131,7 @@ test:
     - pip
     - python-ligo-lw
     - pytest
+    - mkl
   source_files:
     - test
     - pytest.ini
