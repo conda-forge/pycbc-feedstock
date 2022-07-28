@@ -132,7 +132,7 @@ test:
     - python-ligo-lw
     - pytest
   source_files:
-    - tests
+    - test
     - pytest.ini
   commands:
     # check requirements with pip
