@@ -1,0 +1,11 @@
+diff --git a/pytest.ini b/pytest.ini
+index b1c39b3e2..4eaee5936 100644
+--- a/pytest.ini
++++ b/pytest.ini
+@@ -1,4 +1,5 @@
+ # pytest.ini
+ [pytest]
+ testpaths = test
+-addopts = --ignore test/test_fftw_pthreads.py
++addopts = --ignore test/test_fftw_pthreads.py --ignore test/test_tmpltbank.py --ignore test/test_skymax.py --ignore test/test_frame.py
++
