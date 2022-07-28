@@ -130,10 +130,16 @@ test:
     - openssh
     - pip
     - python-ligo-lw
+    - pytest
+  source_files:
+    - tests
+    - pytest.ini
   commands:
     # check requirements with pip
     - python -m pip check
     # test scripts
+    - pytest
+    # simple check that exes load
     - export MPLBACKEND="agg"
     - pycbc_aligned_bank_cat --help
     - pycbc_aligned_stoch_bank --help
@@ -290,7 +296,6 @@ test:
     - pycbc_sngl_minifollowup --help
     - pycbc_split_inspinj --help
     - pycbc_splitbank --help
-    - pycbc_stat_dtphase --help
     - pycbc_strip_injections --help
     #- pycbc_submit_dax --help
     - pycbc_template_recovery_hist --help
