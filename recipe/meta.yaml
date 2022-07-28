@@ -16,6 +16,8 @@ source:
     - no-install_requires-lalsuite.patch
     # enable openmp on all platforms
     - openmp-macos.patch
+    # limit pytest to tests that don't need external data files
+    - pytest.patch
 
 build:
   error_overdepending: true
