@@ -27,7 +27,7 @@ build:
     # not directly linked
     - numpy
     - python
-  number: 0
+  number: 1
   skip: true  # [win]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
