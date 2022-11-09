@@ -1,5 +1,5 @@
 {% set name = "PyCBC" %}
-{% set version = "2.0.4" %}
+{% set version = "2.0.5" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: f1899f46e55a7171d1a6d82a4f0157282daa93e9230c02c903f81f58388a3bed
+  sha256: 7594a337097b22effb225f04c585b3c66d3cdb4e0a65a745440fbe08f993c73d
   patches:
     # skip regenerating the git_version_info
     # https://github.com/gwastro/pycbc/issues/3917
@@ -16,6 +16,8 @@ source:
     - no-install_requires-lalsuite.patch
     # enable openmp on all platforms
     - openmp-macos.patch
+    # limit pytest to tests that don't need external data files
+    - pytest.patch
 
 build:
   error_overdepending: true
@@ -27,7 +29,7 @@ build:
     # not directly linked
     - numpy
     - python
-  number: 1
+  number: 0
   skip: true  # [win]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
@@ -130,10 +132,17 @@ test:
     - openssh
     - pip
     - python-ligo-lw
+    - pytest
+    - mkl
+  source_files:
+    - test
+    - pytest.ini
   commands:
     # check requirements with pip
     - python -m pip check
     # test scripts
+    - python -m pytest
+    # simple check that exes load
     - export MPLBACKEND="agg"
     - pycbc_aligned_bank_cat --help
     - pycbc_aligned_stoch_bank --help
@@ -290,7 +299,6 @@ test:
     - pycbc_sngl_minifollowup --help
     - pycbc_split_inspinj --help
     - pycbc_splitbank --help
-    - pycbc_stat_dtphase --help
     - pycbc_strip_injections --help
     #- pycbc_submit_dax --help
     - pycbc_template_recovery_hist --help
