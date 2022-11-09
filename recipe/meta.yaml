@@ -141,7 +141,7 @@ test:
     # check requirements with pip
     - python -m pip check
     # test scripts
-    - pytest
+    - python -m pytest
     # simple check that exes load
     - export MPLBACKEND="agg"
     - pycbc_aligned_bank_cat --help
