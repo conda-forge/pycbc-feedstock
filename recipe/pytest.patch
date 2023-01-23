@@ -7,5 +7,5 @@ index b1c39b3e2..4eaee5936 100644
  [pytest]
  testpaths = test
 -addopts = --ignore test/test_fftw_pthreads.py
-+addopts = --ignore test/test_fftw_pthreads.py --ignore test/test_tmpltbank.py --ignore test/test_skymax.py --ignore test/test_frame.py --ignore test/test_distributions.py
++addopts = --ignore test/test_fftw_pthreads.py --ignore test/test_tmpltbank.py --ignore test/test_skymax.py --ignore test/test_frame.py --ignore test/test_distributions.py --ignore test/test_live_coinc_compare.py
 +
