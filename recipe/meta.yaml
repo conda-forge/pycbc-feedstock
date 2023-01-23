@@ -173,7 +173,6 @@ test:
     - pycbc_create_injections --help
     - pycbc_make_coinc_search_workflow --help
     - pycbc_cut_merge_triggers_to_tmpltbank --help
-    - pycbc_dark_vs_bright_injections --help
     - pycbc_data_store --help
     - pycbc_distribute_background_bins --help
     - pycbc_faithsim --help
@@ -327,3 +326,5 @@ extra:
   recipe-maintainers:
     - duncanmmacleod
     - ahnitz
+    - spxiwh
+    - titodalcanton
