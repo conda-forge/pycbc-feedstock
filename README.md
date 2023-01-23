@@ -254,4 +254,6 @@ Feedstock Maintainers
 
 * [@ahnitz](https://github.com/ahnitz/)
 * [@duncanmmacleod](https://github.com/duncanmmacleod/)
+* [@spxiwh](https://github.com/spxiwh/)
+* [@titodalcanton](https://github.com/titodalcanton/)
 
