@@ -1,5 +1,5 @@
-About pycbc-feedstock
-=====================
+About pycbc
+===========
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/pycbc-feedstock/blob/main/LICENSE.txt)
 
