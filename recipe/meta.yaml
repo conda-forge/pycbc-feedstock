@@ -60,9 +60,9 @@ requirements:
     - dqsegdb
     - dqsegdb2 >=1.0.1
     - gwdatafind
-    - h5py >=2.10
+    - h5py >=3.0.0,!=3.7.0
     - jinja2
-    - ligo-gracedb
+    - ligo-gracedb >=2.10.0
     - ligo-segments
     - llvm-openmp  # [osx]
     - lscsoft-glue >=1.59.3
@@ -71,7 +71,7 @@ requirements:
     - mpld3 >=0.3
     - {{ pin_compatible('numpy') }}
     - numpy !=1.19.0
-    - pegasus-wms.api >=5.0.1
+    - pegasus-wms.api >=5.0.3
     - pkg-config
     - pillow
     - python
