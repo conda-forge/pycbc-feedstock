@@ -29,7 +29,7 @@ build:
     # not directly linked
     - numpy
     - python
-  number: 0
+  number: 1
   skip: true  # [win]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
@@ -80,7 +80,9 @@ requirements:
     - requests >=1.2.1
     - scipy >=0.16.0
     - six >=1.10.0
+    - python-ligo-lw
     - tqdm
+    - sympy
   run_constrained:
     # https://github.com/gwastro/pycbc/pull/3901#issuecomment-993519319
     - liblalmetaio !=2.1.0
@@ -131,7 +133,6 @@ test:
     - mpi4py
     - openssh
     - pip
-    - python-ligo-lw
     - pytest
     - mkl
   source_files:
