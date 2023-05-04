@@ -18,7 +18,8 @@ source:
     - openmp-macos.patch
     # limit pytest to tests that don't need external data files
     - pytest.patch
-    # load libgomp using RTLD_GLOBAL on macOS
+    # load libgomp using RTLD_GLOBAL on macOS to work around
+    # symbol resolution issues with lalsimulation and openmp
     - libgomp-global.patch  # [osx]
 
 build:
