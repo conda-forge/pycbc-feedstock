@@ -1,0 +1,21 @@
+diff --git a/pycbc/scheme.py b/pycbc/scheme.py
+index 29cab6c86..8f84f0249 100644
+--- a/pycbc/scheme.py
++++ b/pycbc/scheme.py
+@@ -26,6 +26,7 @@
+ This modules provides python contexts that set the default behavior for PyCBC
+ objects.
+ """
++import ctypes
+ import os
+ import pycbc
+ from functools import wraps
+@@ -33,7 +34,7 @@ import logging
+ from .libutils import get_ctypes_library
+
+ try:
+-    _libgomp = get_ctypes_library("gomp", ['gomp'])
++    _libgomp = get_ctypes_library("gomp", ['gomp'], mode=ctypes.RTLD_GLOBAL)
+ except:
+     # Should we fail or give a warning if we cannot import
+     # libgomp? Seems to work even for MKL scheme, but
