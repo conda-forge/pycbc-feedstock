@@ -9,15 +9,21 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: efe02dbe8ac826463499c835f99fd3ccc112172859df089e4df73d894ea6f19d
   patches:
+    # for patches see:
+    #   https://github.com/gwastro/pycbc/compare/master...duncanmmacleod:pycbc:conda-patches
+    # update patches via:
+    #   git pull --rebase upstream vX.Y.Z
+    #   git format-patch vX.Y.Z
+
+    # remove lalsuite requirement from python metadata
+    - 0001-setup.py-remove-lalsuite-install_requires.patch
     # skip regenerating the git_version_info
     # https://github.com/gwastro/pycbc/issues/3917
-    - skip-generate_git_version_info.patch
-    # remove lalsuite requirement from python metadata
-    - no-install_requires-lalsuite.patch
+    - 0002-setup.py-don-t-generate-version-info-in-build.patch
     # enable openmp on all platforms
-    - openmp-macos.patch
+    - 0003-enable-openmp-with-clang.patch
     # limit pytest to tests that don't need external data files
-    - pytest.patch
+    - 0004-ignore-tests-that-rely-on-external-data-files.patch
 
 build:
   error_overdepending: true

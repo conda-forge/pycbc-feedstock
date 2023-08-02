@@ -1,0 +1,43 @@
+From 76aa1805b0882b4c05fcd4be68cd588ff0485b97 Mon Sep 17 00:00:00 2001
+From: "duncan.macleod" <duncan.macleod@ligo.org>
+Date: Wed, 2 Aug 2023 17:49:53 +0100
+Subject: [PATCH 3/4] enable openmp with clang
+
+---
+ pycbc/events/simd_threshold_ccode.cpp | 4 +---
+ pycbc/filter/simd_correlate_ccode.cpp | 4 +---
+ 2 files changed, 2 insertions(+), 6 deletions(-)
+
+diff --git a/pycbc/events/simd_threshold_ccode.cpp b/pycbc/events/simd_threshold_ccode.cpp
+index 95a055496..ef3ac6307 100644
+--- a/pycbc/events/simd_threshold_ccode.cpp
++++ b/pycbc/events/simd_threshold_ccode.cpp
+@@ -48,9 +48,7 @@
+  * compartmentalize SIMD code from OpenMP code.
+  */
+ 
+-#ifndef __clang__
+-    #include <omp.h> 
+-#endif
++#include <omp.h>
+ #include <stdint.h> // For uint32_t, int64_t
+ #include <complex>
+ #include <math.h> // For M_SQRT2
+diff --git a/pycbc/filter/simd_correlate_ccode.cpp b/pycbc/filter/simd_correlate_ccode.cpp
+index 07a2a7420..1ad8e2cb4 100644
+--- a/pycbc/filter/simd_correlate_ccode.cpp
++++ b/pycbc/filter/simd_correlate_ccode.cpp
+@@ -32,9 +32,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <complex>
+-#ifndef __clang__
+-    #include <omp.h>
+-#endif
++#include <omp.h>
+ 
+ #if (defined(__x86_64__) || defined(__i386__))
+     #include <x86intrin.h>
+-- 
+2.41.0
+

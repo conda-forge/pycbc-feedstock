@@ -1,0 +1,22 @@
+From e5f8d987bb23c3ca703285326fa2978f0634422a Mon Sep 17 00:00:00 2001
+From: "duncan.macleod" <duncan.macleod@ligo.org>
+Date: Wed, 2 Aug 2023 17:50:46 +0100
+Subject: [PATCH 4/4] ignore tests that rely on external data files
+
+---
+ pytest.ini | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pytest.ini b/pytest.ini
+index b1c39b3e2..bba33f74f 100644
+--- a/pytest.ini
++++ b/pytest.ini
+@@ -1,4 +1,4 @@
+ # pytest.ini
+ [pytest]
+ testpaths = test
+-addopts = --ignore test/test_fftw_pthreads.py
++addopts = --ignore test/test_fftw_pthreads.py --ignore test/test_tmpltbank.py --ignore test/test_skymax.py --ignore test/test_frame.py --ignore test/test_distributions.py --ignore test/test_live_coinc_compare.py
+-- 
+2.41.0
+
