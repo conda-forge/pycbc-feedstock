@@ -231,12 +231,12 @@ test:
     - pycbc_losc_segment_query --help
     - pycbc_make_bank_verifier_workflow --help
     - pycbc_make_banksim --help
-    - pycbc_make_coinc_search_workflow --help
     - pycbc_make_faithsim --help
     #- pycbc_make_grb_summary_page --help
     - pycbc_make_html_page --help
     - pycbc_make_inference_inj_workflow --help
     - pycbc_make_inference_workflow --help
+    - pycbc_make_offline_search_workflow --help
     #- pycbc_make_offline_grb_workflow --help
     - pycbc_make_psd_estimation_workflow --help
     - pycbc_make_sbank_workflow --help
