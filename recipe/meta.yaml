@@ -80,6 +80,7 @@ requirements:
     - pegasus-wms.api >=5.0.3
     - pkg-config
     - pillow
+    - pykerr
     - python
     - python-lalframe
     - python-lalsimulation
