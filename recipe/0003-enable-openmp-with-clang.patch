@@ -1,4 +1,4 @@
-From 76aa1805b0882b4c05fcd4be68cd588ff0485b97 Mon Sep 17 00:00:00 2001
+From 081865e7ae87ae5006d5a44745d25926c9475f78 Mon Sep 17 00:00:00 2001
 From: "duncan.macleod" <duncan.macleod@ligo.org>
 Date: Wed, 2 Aug 2023 17:49:53 +0100
 Subject: [PATCH 3/4] enable openmp with clang
@@ -39,5 +39,5 @@ index 07a2a7420..1ad8e2cb4 100644
  #if (defined(__x86_64__) || defined(__i386__))
      #include <x86intrin.h>
 -- 
-2.41.0
+2.39.2
 
