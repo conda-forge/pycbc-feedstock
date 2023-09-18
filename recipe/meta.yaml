@@ -1,5 +1,5 @@
 {% set name = "PyCBC" %}
-{% set version = "2.2.1" %}
+{% set version = "2.2.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: efe02dbe8ac826463499c835f99fd3ccc112172859df089e4df73d894ea6f19d
+  sha256: fdb90fdbde24c7d6d9dfb20275f2a648e5d22717325a404c8940e929588d25f1
   patches:
     # for patches see:
     #   https://github.com/gwastro/pycbc/compare/master...duncanmmacleod:pycbc:conda-patches
