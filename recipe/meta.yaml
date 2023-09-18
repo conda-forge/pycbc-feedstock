@@ -1,5 +1,5 @@
 {% set name = "PyCBC" %}
-{% set version = "2.2.0" %}
+{% set version = "2.2.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,17 +7,23 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: ae4878e4facd18ff2f136a3e2057dacbb9f6180b877a36ff1564f1dc84161fce
+  sha256: efe02dbe8ac826463499c835f99fd3ccc112172859df089e4df73d894ea6f19d
   patches:
+    # for patches see:
+    #   https://github.com/gwastro/pycbc/compare/master...duncanmmacleod:pycbc:conda-patches
+    # update patches via:
+    #   git pull --rebase upstream vX.Y.Z
+    #   git format-patch vX.Y.Z
+
+    # remove lalsuite requirement from python metadata
+    - 0001-setup.py-remove-lalsuite-install_requires.patch
     # skip regenerating the git_version_info
     # https://github.com/gwastro/pycbc/issues/3917
-    - skip-generate_git_version_info.patch
-    # remove lalsuite requirement from python metadata
-    - no-install_requires-lalsuite.patch
+    - 0002-setup.py-don-t-generate-version-info-in-build.patch
     # enable openmp on all platforms
-    - openmp-macos.patch
+    - 0003-enable-openmp-with-clang.patch
     # limit pytest to tests that don't need external data files
-    - pytest.patch
+    - 0004-ignore-tests-that-rely-on-external-data-files.patch
 
 build:
   error_overdepending: true
@@ -29,7 +35,7 @@ build:
     # not directly linked
     - numpy
     - python
-  number: 1
+  number: 0
   skip: true  # [win]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
@@ -74,6 +80,7 @@ requirements:
     - pegasus-wms.api >=5.0.3
     - pkg-config
     - pillow
+    - pykerr
     - python
     - python-lalframe
     - python-lalsimulation
@@ -172,7 +179,6 @@ test:
     - pycbc_condition_strain --help
     - pycbc_create_html_snippet --help
     - pycbc_create_injections --help
-    - pycbc_make_coinc_search_workflow --help
     - pycbc_cut_merge_triggers_to_tmpltbank --help
     - pycbc_data_store --help
     - pycbc_distribute_background_bins --help
@@ -197,6 +203,7 @@ test:
     - pycbc_grb_inj_finder --help
     - pycbc_grb_trig_cluster --help
     - pycbc_grb_trig_combiner --help
+    - pycbc_gwosc_segment_query --help
     - pycbc_hdf5_splitbank --help
     - pycbc_ifar_catalog --help
     - pycbc_inference --help
@@ -221,15 +228,14 @@ test:
     - pycbc_inspiral_skymax --help
     - pycbc_live --help
     - pycbc_live_nagios_monitor --help
-    - pycbc_losc_segment_query --help
     - pycbc_make_bank_verifier_workflow --help
     - pycbc_make_banksim --help
-    - pycbc_make_coinc_search_workflow --help
     - pycbc_make_faithsim --help
     #- pycbc_make_grb_summary_page --help
     - pycbc_make_html_page --help
     - pycbc_make_inference_inj_workflow --help
     - pycbc_make_inference_workflow --help
+    - pycbc_make_offline_search_workflow --help
     #- pycbc_make_offline_grb_workflow --help
     - pycbc_make_psd_estimation_workflow --help
     - pycbc_make_sbank_workflow --help
