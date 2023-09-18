@@ -179,7 +179,6 @@ test:
     - pycbc_condition_strain --help
     - pycbc_create_html_snippet --help
     - pycbc_create_injections --help
-    - pycbc_make_coinc_search_workflow --help
     - pycbc_cut_merge_triggers_to_tmpltbank --help
     - pycbc_data_store --help
     - pycbc_distribute_background_bins --help
@@ -204,6 +203,7 @@ test:
     - pycbc_grb_inj_finder --help
     - pycbc_grb_trig_cluster --help
     - pycbc_grb_trig_combiner --help
+    - pycbc_gwosc_segment_query --help
     - pycbc_hdf5_splitbank --help
     - pycbc_ifar_catalog --help
     - pycbc_inference --help
@@ -228,7 +228,6 @@ test:
     - pycbc_inspiral_skymax --help
     - pycbc_live --help
     - pycbc_live_nagios_monitor --help
-    - pycbc_losc_segment_query --help
     - pycbc_make_bank_verifier_workflow --help
     - pycbc_make_banksim --help
     - pycbc_make_faithsim --help
