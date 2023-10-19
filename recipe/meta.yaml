@@ -25,6 +25,9 @@ source:
     # limit pytest to tests that don't need external data files
     - 0004-ignore-tests-that-rely-on-external-data-files.patch
 
+    # DEBUG
+    - debug-test_threshold.patch
+
 build:
   error_overdepending: true
   error_overlinking: true

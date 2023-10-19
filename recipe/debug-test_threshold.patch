@@ -1,0 +1,16 @@
+diff --git a/test/test_threshold.py b/test/test_threshold.py
+index 387ed55fe..9a13e7cc0 100644
+--- a/test/test_threshold.py
++++ b/test/test_threshold.py
+@@ -52,7 +52,11 @@ class TestThreshold(unittest.TestCase):
+     def test_threshold(self):
+         with self.context:
+             locs, vals = threshold(self.series, self.threshold)
++            print(self.locs)
++            print(locs)
+             self.assertTrue((locs == self.locs).all())
++            print(self.vals)
++            print(vals)
+             self.assertTrue((vals == self.vals).all())
+             print(len(locs), len(vals))
+ suite = unittest.TestSuite()
