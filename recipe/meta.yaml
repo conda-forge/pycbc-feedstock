@@ -1,5 +1,5 @@
 {% set name = "PyCBC" %}
-{% set version = "2.2.2" %}
+{% set version = "2.4.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: fdb90fdbde24c7d6d9dfb20275f2a648e5d22717325a404c8940e929588d25f1
+  sha256: 44f520fb6033233911166be2d4adb66f77d3207a8491288a57d2976c81d350d4
   patches:
     # for patches see:
     #   https://github.com/gwastro/pycbc/compare/master...duncanmmacleod:pycbc:conda-patches
@@ -62,10 +62,9 @@ requirements:
     - astropy !=4.0.5,!=4.2.1,>=2.0.3
     - beautifulsoup4 >=4.6.0
     - cython >=0.29
-    - decorator >=3.4.2
-    - dqsegdb
-    - dqsegdb2 >=1.0.1
-    - gwdatafind
+    - dqsegdb >=2.0.0
+    - dqsegdb2 >=1.1.4
+    - gwdatafind >=1.1.3
     - h5py >=3.0.0,!=3.7.0
     - jinja2
     - ligo-gracedb >=2.10.0
@@ -77,19 +76,18 @@ requirements:
     - mpld3 >=0.3
     - {{ pin_compatible('numpy') }}
     - numpy !=1.19.0
-    - pegasus-wms.api >=5.0.3
+    - pegasus-wms.api >=5.0.6
     - pkg-config
     - pillow
     - pykerr
     - python
     - python-lalframe
     - python-lalsimulation
-    - requests >=1.2.1
+    - python-ligo-lw >=1.8.1
     - scipy >=0.16.0
     - six >=1.10.0
-    - python-ligo-lw
-    - tqdm
     - sympy
+    - tqdm
   run_constrained:
     # https://github.com/gwastro/pycbc/pull/3901#issuecomment-993519319
     - liblalmetaio !=2.1.0
