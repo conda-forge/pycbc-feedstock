@@ -1,5 +1,5 @@
 {% set name = "PyCBC" %}
-{% set version = "2.1.2" %}
+{% set version = "2.1.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 2a84cc8101c915ded3d5efa80adc0fb9eed7c70a7ba8916117d986f0b1117581
+  sha256: 4699a017d094f048bdece884bbb39b992df2d54b99f301ccc205017701fae356
   patches:
     # skip regenerating the git_version_info
     # https://github.com/gwastro/pycbc/issues/3917
