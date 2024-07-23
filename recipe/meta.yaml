@@ -36,7 +36,7 @@ build:
     - numpy
     - python
   number: 0
-  skip: true  # [win]
+  skip: true  # [win or py>=312]
   script:
     - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
     - {{ PYTHON }} -m pip install . -vv
