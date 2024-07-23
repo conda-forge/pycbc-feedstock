@@ -198,7 +198,6 @@ test:
     - pycbc_geom_nonspinbank --help
     - pycbc_get_ffinal --help
     - pycbc_get_loudest_params --help
-    - pycbc_grb_inj_combiner --help
     - pycbc_grb_inj_finder --help
     - pycbc_grb_trig_cluster --help
     - pycbc_grb_trig_combiner --help
