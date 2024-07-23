@@ -86,12 +86,15 @@ requirements:
     - python-lalsimulation
     - python-ligo-lw >=1.8.1
     - scipy >=0.16.0
+    - setuptools
     - six >=1.10.0
     - sympy
     - tqdm
   run_constrained:
     # https://github.com/gwastro/pycbc/pull/3901#issuecomment-993519319
     - liblalmetaio !=2.1.0
+    # https://github.com/conda-forge/backports-feedstock/issues/6
+    - setuptools <71.0.0  # [py<39]
 
 test:
   imports:
