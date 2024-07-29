@@ -20,26 +20,14 @@ source:
     # skip regenerating the git_version_info
     # https://github.com/gwastro/pycbc/issues/3917
     - 0002-setup.py-don-t-generate-version-info-in-build.patch
-    # enable openmp on all platforms
-    - 0003-enable-openmp-with-clang.patch
     # limit pytest to tests that don't need external data files
-    - 0004-ignore-tests-that-rely-on-external-data-files.patch
+    - 0003-ignore-tests-that-rely-on-external-data-files.patch
 
 build:
-  error_overdepending: true
   error_overlinking: true
-  ignore_run_exports:
-    # not sure why, on osx-arm64 libcxx isn't
-    # linked in the compiled extension modules
-    - libcxx  # [osx and arm64]
-    # not directly linked
-    - numpy
-    - python
   number: 0
   skip: true  # [win or py>=312]
-  script:
-    - export CFLAGS="${CFLAGS} -fopenmp"  # [osx]
-    - {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
@@ -50,11 +38,9 @@ requirements:
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
-    - llvm-openmp  # [osx]
   host:
     - cython
     - libgomp  # [linux]
-    - llvm-openmp  # [osx]
     - numpy
     - pip
     - python
@@ -70,7 +56,6 @@ requirements:
     - jinja2
     - ligo-gracedb >=2.10.0
     - ligo-segments
-    - llvm-openmp  # [osx]
     - lscsoft-glue >=1.59.3
     - mako >=1.0.1
     - matplotlib-base >=2.0.0
