@@ -25,7 +25,7 @@ source:
 
 build:
   error_overlinking: true
-  number: 0
+  number: 1
   skip: true  # [win or py>=312]
   script: {{ PYTHON }} -m pip install . -vv
 
