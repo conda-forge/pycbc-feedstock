@@ -9,11 +9,23 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: dfddedfd5c06555f33582469330c3fc8767b697b06335f57d0eea677bc91ea2b
   patches:
-    # for patches see:
-    #   https://github.com/gwastro/pycbc/compare/master...duncanmmacleod:pycbc:conda-patches
-    # update patches via:
-    #   git pull --rebase upstream vX.Y.Z
-    #   git format-patch vX.Y.Z
+    # to update the patches for a new release:
+    #
+    #     # -- checkout the new source release tag
+    #     cd /path/to/git/pycbc
+    #     git fetch
+    #     git checkout <release-tag>
+    #     # -- apply the patches on top of the release tag
+    #     git am --3way /path/to/git/pycbc-feedstock/recipe/patches/*.patch
+    #     <resolve-any-conflicts>
+    #     # -- render new patch files
+    #     git format-patch <release-tag>
+    #     # -- copy them back to the feedstock
+    #     cd /path/to/git/pycbc-feedstock
+    #     git rm recipe/patches/*.patch
+    #     cp /path/to/git/pycbc/*.patch recipe/patches/
+    #     git add recipe/patches/*.patch
+    #     <update-this-file-as-required>
 
     # remove lalsuite requirement from python metadata
     - patches/0001-setup.py-remove-lalsuite-install_requires.patch

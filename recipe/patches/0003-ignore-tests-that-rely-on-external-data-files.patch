@@ -1,4 +1,4 @@
-From e3e5b09b8b38ffd03a836aece43f858a9f0e3f6e Mon Sep 17 00:00:00 2001
+From 07c07482f8cbbe276f1abf3cfe322ceabbde8c91 Mon Sep 17 00:00:00 2001
 From: "duncan.macleod" <duncan.macleod@ligo.org>
 Date: Wed, 2 Aug 2023 17:50:46 +0100
 Subject: [PATCH 3/3] ignore tests that rely on external data files
