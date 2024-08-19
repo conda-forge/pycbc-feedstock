@@ -1,5 +1,5 @@
 {% set name = "PyCBC" %}
-{% set version = "2.4.2" %}
+{% set version = "2.5.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,39 +7,51 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 2965b7229ee834517a6788d2af9f07a4c00b9ed6344e9f1cd8ba169bc90ee76a
+  sha256: dfddedfd5c06555f33582469330c3fc8767b697b06335f57d0eea677bc91ea2b
   patches:
-    # for patches see:
-    #   https://github.com/gwastro/pycbc/compare/master...duncanmmacleod:pycbc:conda-patches
-    # update patches via:
-    #   git pull --rebase upstream vX.Y.Z
-    #   git format-patch vX.Y.Z
+    # to update the patches for a new release:
+    #
+    #     # -- checkout the new source release tag
+    #     cd /path/to/git/pycbc
+    #     git fetch
+    #     git checkout <release-tag>
+    #     # -- apply the patches on top of the release tag
+    #     git am --3way /path/to/git/pycbc-feedstock/recipe/patches/*.patch
+    #     <resolve-any-conflicts>
+    #     # -- render new patch files
+    #     git format-patch <release-tag>
+    #     # -- copy them back to the feedstock
+    #     cd /path/to/git/pycbc-feedstock
+    #     git rm recipe/patches/*.patch
+    #     cp /path/to/git/pycbc/*.patch recipe/patches/
+    #     git add recipe/patches/*.patch
+    #     <update-this-file-as-required>
 
     # remove lalsuite requirement from python metadata
-    - 0001-setup.py-remove-lalsuite-install_requires.patch
+    - patches/0001-setup.py-remove-lalsuite-install_requires.patch
     # skip regenerating the git_version_info
     # https://github.com/gwastro/pycbc/issues/3917
-    - 0002-setup.py-don-t-generate-version-info-in-build.patch
+    - patches/0002-setup.py-don-t-generate-version-info-in-build.patch
     # limit pytest to tests that don't need external data files
-    - 0003-ignore-tests-that-rely-on-external-data-files.patch
+    - patches/0003-ignore-tests-that-rely-on-external-data-files.patch
 
 build:
   error_overlinking: true
   number: 0
-  skip: true  # [win or py>=312]
+  skip: true  # [win or py<39]
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - cython                                 # [build_platform != target_platform]
+    - cython >=0.29.21                       # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
   host:
-    - cython
+    - cython >=0.29.21
     - libgomp  # [linux]
     - numpy
     - pip
@@ -49,7 +61,6 @@ requirements:
     - astropy !=4.0.5,!=4.2.1,>=2.0.3
     - beautifulsoup4 >=4.6.0
     - cython >=0.29
-    - dqsegdb >=2.0.0
     - dqsegdb2 >=1.1.4
     - gwdatafind >=1.1.3
     - h5py >=3.0.0,!=3.7.0
@@ -72,7 +83,6 @@ requirements:
     - python-ligo-lw >=1.8.1
     - scipy >=0.16.0
     - setuptools
-    - six >=1.10.0
     - sympy
     - tqdm
   run_constrained:
@@ -159,7 +169,6 @@ test:
     - pycbc_coinc_mergetrigs --help
     - pycbc_coinc_statmap --help
     - pycbc_coinc_statmap_inj --help
-    - pycbc_coinc_time --help
     - pycbc_combine_coincident_events --help
     - pycbc_combine_statmap --help
     - pycbc_compress_bank --help
