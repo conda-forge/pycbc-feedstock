@@ -38,20 +38,20 @@ source:
 build:
   error_overlinking: true
   number: 0
-  skip: true  # [win]
+  skip: true  # [win or py<39]
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - cython                                 # [build_platform != target_platform]
+    - cython >=0.29.21                       # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
   host:
-    - cython
+    - cython >=0.29.21
     - libgomp  # [linux]
     - numpy
     - pip
@@ -83,7 +83,6 @@ requirements:
     - python-ligo-lw >=1.8.1
     - scipy >=0.16.0
     - setuptools
-    - six >=1.10.0
     - sympy
     - tqdm
   run_constrained:
