@@ -61,7 +61,6 @@ requirements:
     - astropy !=4.0.5,!=4.2.1,>=2.0.3
     - beautifulsoup4 >=4.6.0
     - cython >=0.29
-    - dqsegdb >=2.0.0
     - dqsegdb2 >=1.1.4
     - gwdatafind >=1.1.3
     - h5py >=3.0.0,!=3.7.0
@@ -171,7 +170,6 @@ test:
     - pycbc_coinc_mergetrigs --help
     - pycbc_coinc_statmap --help
     - pycbc_coinc_statmap_inj --help
-    - pycbc_coinc_time --help
     - pycbc_combine_coincident_events --help
     - pycbc_combine_statmap --help
     - pycbc_compress_bank --help
