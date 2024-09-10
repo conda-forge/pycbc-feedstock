@@ -138,7 +138,7 @@ test:
     - openssh
     - pip
     - pytest
-    - mkl
+    - mkl  # [x86_64]
   source_files:
     - test
     - pytest.ini
