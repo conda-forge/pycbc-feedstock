@@ -138,7 +138,7 @@ test:
     - openssh
     - pip
     - pytest
-    - mkl
+    - mkl  # [x86_64]
   source_files:
     - test
     - pytest.ini
@@ -146,6 +146,8 @@ test:
     # check requirements with pip
     - python -m pip check
     # test scripts
+    # (use PYTEST_ADDOPTS because pytest does weird things with command-line arguments)
+    - export PYTEST_ADDOPTS="--ignore test/test_fft_mkl_threaded.py"  # [unix and not x86_64]
     - python -m pytest
     # simple check that exes load
     - export MPLBACKEND="agg"
