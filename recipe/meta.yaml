@@ -37,7 +37,7 @@ source:
 
 build:
   error_overlinking: true
-  number: 0
+  number: 1
   skip: true  # [win or py<39]
   script: {{ PYTHON }} -m pip install . -vv
 
@@ -71,7 +71,6 @@ requirements:
     - mako >=1.0.1
     - matplotlib-base >=2.0.0
     - mpld3 >=0.3
-    - {{ pin_compatible('numpy') }}
     - numpy !=1.19.0
     - pegasus-wms.api >=5.0.6
     - pkg-config
