@@ -37,8 +37,8 @@ source:
 
 build:
   error_overlinking: true
-  number: 1
-  skip: true  # [win or py<39]
+  number: 0
+  skip: true  # [win]
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
