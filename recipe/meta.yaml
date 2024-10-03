@@ -72,7 +72,7 @@ requirements:
     - matplotlib-base >=2.0.0
     - mpld3 >=0.3
     - numpy !=1.19.0
-    - pegasus-wms.api >=5.0.6
+    - pegasus-wms.api >=5.0.8
     - pkg-config
     - pillow
     - pykerr
