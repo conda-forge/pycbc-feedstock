@@ -327,7 +327,8 @@ about:
 
 extra:
   recipe-maintainers:
-    - duncanmmacleod
     - ahnitz
+    - duncanmmacleod
+    - maxtrevor
     - spxiwh
     - titodalcanton
