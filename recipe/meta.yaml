@@ -292,7 +292,7 @@ test:
     - pycbc_pygrb_plot_coh_ifosnr --help
     - pycbc_pygrb_plot_skygrid --help
     - pycbc_pygrb_plot_snr_timeseries --help
-    - pycbc_pygrb_pp_workflow --help
+    - pycbc_pygrb_results_workflow --help
     - pycbc_randomize_inj_dist_by_optsnr --help
     - pycbc_reduce_template_bank --help
     - pycbc_rerank_passthrough --help
