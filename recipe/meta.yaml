@@ -1,13 +1,13 @@
 {% set name = "PyCBC" %}
-{% set version = "2.6.0" %}
+{% set version = "2.7.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 1b65f5fdc89fe842541819979dc34294d47405a677439cec8f87bd6674e2a781
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: a4064a5aaf07c0499b19919c8902fce663f743f0f7bd396b623e25b124514d80
   patches:
     # to update the patches for a new release:
     #
@@ -292,7 +292,7 @@ test:
     - pycbc_pygrb_plot_coh_ifosnr --help
     - pycbc_pygrb_plot_skygrid --help
     - pycbc_pygrb_plot_snr_timeseries --help
-    - pycbc_pygrb_pp_workflow --help
+    - pycbc_pygrb_results_workflow --help
     - pycbc_randomize_inj_dist_by_optsnr --help
     - pycbc_reduce_template_bank --help
     - pycbc_rerank_passthrough --help
@@ -327,7 +327,8 @@ about:
 
 extra:
   recipe-maintainers:
-    - duncanmmacleod
     - ahnitz
+    - duncanmmacleod
+    - maxtrevor
     - spxiwh
     - titodalcanton
