@@ -37,7 +37,7 @@ source:
 
 build:
   error_overlinking: true
-  number: 0
+  number: 1
   skip: true  # [win]
   script: {{ PYTHON }} -m pip install . -vv
 
@@ -58,7 +58,7 @@ requirements:
     - python
     - setuptools
   run:
-    - astropy !=4.0.5,!=4.2.1,>=2.0.3
+    - astropy-base !=4.0.5,!=4.2.1,>=2.0.3
     - beautifulsoup4 >=4.6.0
     - cython >=0.29
     - dqsegdb2 >=1.1.4
