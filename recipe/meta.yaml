@@ -64,14 +64,14 @@ requirements:
     - dqsegdb2 >=1.1.4
     - gwdatafind >=1.1.3
     - h5py >=3.0.0,!=3.7.0
+    - igwn-segments
     - jinja2
     - ligo-gracedb >=2.10.0
-    - ligo-segments
     - lscsoft-glue >=1.59.3
     - mako >=1.0.1
     - matplotlib-base >=2.0.0
     - mpld3 >=0.3
-    - numpy !=1.19.0
+    - numpy !=1.19.0,!=2.2.2
     - pegasus-wms.api >=5.0.8
     - pkg-config
     - pillow
