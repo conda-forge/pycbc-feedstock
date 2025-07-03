@@ -1,5 +1,5 @@
 {% set name = "PyCBC" %}
-{% set version = "2.8.2" %}
+{% set version = "2.9.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: b304b3293079cec48cc0b0712d19a652c57968c27ac4e421d9447cec3706ecca
+  sha256: f9bf981814d6d522ad0c9affadcfd3f3d2ea8422b047d70755b06c03c08e342e
   patches:
     # to update the patches for a new release:
     #
