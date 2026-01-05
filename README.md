@@ -21,7 +21,6 @@ PyCBC was used in the first direct detection of gravitational
 waves (GW150914) by LIGO and is used in the ongoing analysis of
 LIGO and Virgo data.
 
-
 Current build status
 ====================
 
