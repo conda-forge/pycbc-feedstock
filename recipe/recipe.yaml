@@ -1,0 +1,338 @@
+schema_version: 1
+
+context:
+  name: PyCBC
+  version: 2.9.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: f9bf981814d6d522ad0c9affadcfd3f3d2ea8422b047d70755b06c03c08e342e
+  patches:
+    # to update the patches for a new release:
+    #
+    #     # -- checkout the new source release tag
+    #     cd /path/to/git/pycbc
+    #     git fetch
+    #     git checkout <release-tag>
+    #     # -- apply the patches on top of the release tag
+    #     git am --3way /path/to/git/pycbc-feedstock/recipe/patches/*.patch
+    #     <resolve-any-conflicts>
+    #     # -- render new patch files
+    #     git format-patch <release-tag>
+    #     # -- copy them back to the feedstock
+    #     cd /path/to/git/pycbc-feedstock
+    #     git rm recipe/patches/*.patch
+    #     cp /path/to/git/pycbc/*.patch recipe/patches/
+    #     git add recipe/patches/*.patch
+    #     <update-this-file-as-required>
+    # remove lalsuite requirement from python metadata
+    - patches/0001-setup.py-remove-lalsuite-install_requires.patch
+    # skip regenerating the git_version_info
+    # https://github.com/gwastro/pycbc/issues/3917
+    - patches/0002-setup.py-don-t-generate-version-info-in-build.patch
+    # limit pytest to tests that don't need external data files
+    - patches/0003-ignore-tests-that-rely-on-external-data-files.patch
+
+build:
+  dynamic_linking:
+    overlinking_behavior: error
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv
+  skip:
+    - win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
+    - if: build_platform != target_platform
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+        - cython >=0.29.21
+        - numpy
+  host:
+    - cython >=0.29.21
+    - numpy
+    - pip
+    - python
+    - setuptools
+    - if: linux
+      then: libgomp
+  run:
+    - astropy-base !=4.0.5,!=4.2.1,>=2.0.3
+    - beautifulsoup4 >=4.6.0
+    - cython >=0.29
+    - dqsegdb2 >=1.1.4
+    - gwdatafind >=1.1.3
+    - h5py >=3.0.0,!=3.7.0
+    - igwn-segments
+    - jinja2
+    - ligo-gracedb >=2.10.0
+    - lscsoft-glue >=1.59.3
+    - mako >=1.0.1
+    - matplotlib-base >=2.0.0
+    - mpld3 >=0.3
+    - numpy !=1.19.0,!=2.2.2
+    - pegasus-wms.api >=5.0.8
+    - pkg-config
+    - pillow
+    - pykerr
+    - python
+    - python-lalframe
+    - python-lalsimulation
+    - python-ligo-lw >=1.8.1
+    - scipy >=0.16.0
+    - setuptools
+    - sympy
+    - tqdm
+  run_constraints:
+    - liblalmetaio !=2.1.0
+
+tests:
+  - python:
+      imports:
+        - pycbc
+        - pycbc.bin_utils
+        - pycbc.boundaries
+        - pycbc.catalog
+        - pycbc.conversions
+        - pycbc.coordinates
+        - pycbc.cosmology
+        - pycbc.detector
+        - pycbc.distributions
+        - pycbc.dq
+        - pycbc.events
+        - pycbc.fft
+        - pycbc.filter
+        - pycbc.frame
+        - pycbc.inference
+        - pycbc.inference.io
+        - pycbc.inference.models
+        - pycbc.inference.sampler
+        - pycbc.inject
+        - pycbc.io
+        - pycbc.libutils
+        - pycbc.noise
+        - pycbc.opt
+        - pycbc.pnutils
+        - pycbc.pool
+        - pycbc.population
+        - pycbc.psd
+        - pycbc.rate
+        - pycbc.results
+        - pycbc.scheme
+        - pycbc.sensitivity
+        - pycbc.strain
+        - pycbc.tmpltbank
+        - pycbc.transforms
+        - pycbc.types
+        - pycbc.vetoes
+        - pycbc.waveform
+        - pycbc.workflow
+      pip_check: true
+  - files:
+      source:
+        - test
+        - pytest.ini
+    requirements:
+      run:
+        - epsie
+        - fftw
+        - mpi4py
+        - openssh
+        - pip
+        - pytest
+        - if: x86_64
+          then: mkl
+    script:
+      # Skip test_fft_mkl_threaded.py on non-x86_64 platforms
+      - if: unix and not x86_64
+        then: "export PYTEST_ADDOPTS=\"--ignore test/test_fft_mkl_threaded.py\""
+      # Run test suite
+      - python -m pytest
+      # Check that command-line scripts are functional
+      - "export MPLBACKEND=\"agg\""
+      - pycbc_aligned_bank_cat --help
+      - pycbc_aligned_stoch_bank --help
+      - pycbc_apply_rerank --help
+      - pycbc_average_psd --help
+      - pycbc_bank_verification --help
+      - pycbc_banksim --help
+      - pycbc_banksim_combine_banks --help
+      - pycbc_banksim_match_combine --help
+      - pycbc_banksim_plot_eff_fitting_factor --help
+      - pycbc_banksim_plot_fitting_factors --help
+      - pycbc_banksim_skymax --help
+      - pycbc_banksim_table_point_injs --help
+      - pycbc_brute_bank --help
+      - pycbc_calculate_psd --help
+      - pycbc_coinc_bank2hdf --help
+      - pycbc_coinc_findtrigs --help
+      - pycbc_coinc_hdfinjfind --help
+      - pycbc_coinc_mergetrigs --help
+      - pycbc_coinc_statmap --help
+      - pycbc_coinc_statmap_inj --help
+      - pycbc_combine_coincident_events --help
+      - pycbc_combine_statmap --help
+      - pycbc_compress_bank --help
+      - pycbc_condition_strain --help
+      - pycbc_create_html_snippet --help
+      - pycbc_create_injections --help
+      - pycbc_cut_merge_triggers_to_tmpltbank --help
+      - pycbc_data_store --help
+      - pycbc_distribute_background_bins --help
+      - pycbc_faithsim --help
+      - pycbc_fit_sngl_trigs --help
+      - pycbc_fit_sngls_binned --help
+      - pycbc_fit_sngls_by_template --help
+      - pycbc_fit_sngls_over_multiparam --help
+      - pycbc_fit_sngls_over_param --help
+      - pycbc_fit_sngls_split_binned --help
+      - pycbc_followup_file --help
+      - pycbc_foreground_censor --help
+      - pycbc_foreground_minifollowup --help
+      - pycbc_generate_hwinj --help
+      - pycbc_generate_hwinj_from_xml --help
+      - pycbc_geom_aligned_2dstack --help
+      - pycbc_geom_aligned_bank --help
+      - pycbc_geom_nonspinbank --help
+      - pycbc_get_ffinal --help
+      - pycbc_get_loudest_params --help
+      - pycbc_grb_inj_finder --help
+      - pycbc_grb_trig_cluster --help
+      - pycbc_grb_trig_combiner --help
+      - pycbc_gwosc_segment_query --help
+      - pycbc_hdf5_splitbank --help
+      - pycbc_ifar_catalog --help
+      - pycbc_inference --help
+      - pycbc_inference_extract_samples --help
+      - pycbc_inference_plot_acceptance_rate --help
+      - pycbc_inference_plot_acf --help
+      - pycbc_inference_plot_acl --help
+      - pycbc_inference_plot_gelman_rubin --help
+      - pycbc_inference_plot_geweke --help
+      - pycbc_inference_plot_inj_recovery --help
+      - pycbc_inference_plot_movie --help
+      - pycbc_inference_plot_posterior --help
+      - pycbc_inference_plot_pp --help
+      - pycbc_inference_plot_prior --help
+      - pycbc_inference_plot_samples --help
+      - pycbc_inference_plot_thermodynamic_integrand --help
+      - pycbc_inference_table_summary --help
+      - pycbc_inj_cut --help
+      - pycbc_injection_minifollowup --help
+      - pycbc_insert_frame_hwinj --help
+      - pycbc_inspiral --help
+      - pycbc_inspiral_skymax --help
+      - pycbc_live --help
+      - pycbc_live_nagios_monitor --help
+      - pycbc_make_bank_verifier_workflow --help
+      - pycbc_make_banksim --help
+      - pycbc_make_faithsim --help
+      - pycbc_make_html_page --help
+      - pycbc_make_inference_inj_workflow --help
+      - pycbc_make_inference_workflow --help
+      - pycbc_make_offline_search_workflow --help
+      - pycbc_make_psd_estimation_workflow --help
+      - pycbc_make_sbank_workflow --help
+      - pycbc_make_uberbank_workflow --help
+      - pycbc_mass_area_plot --help
+      - pycbc_mchirp_plots --help
+      - pycbc_merge_psds --help
+      - pycbc_multi_inspiral --help
+      - pycbc_add_statmap --help
+      - pycbc_coinc_findtrigs --help
+      - pycbc_coinc_statmap --help
+      - pycbc_coinc_statmap_inj --help
+      - pycbc_combine_statmap --help
+      - pycbc_dtphase --help
+      - pycbc_exclude_zerolag --help
+      - pycbc_optimal_snr --help
+      - pycbc_optimize_snr --help
+      - pycbc_page_banktriggerrate --help
+      - pycbc_page_coinc_snrchi --help
+      - pycbc_page_coincinfo --help
+      - pycbc_page_foreground --help
+      - pycbc_page_foundmissed --help
+      - pycbc_page_ifar --help
+      - pycbc_page_injinfo --help
+      - pycbc_page_injtable --help
+      - pycbc_page_recovery --help
+      - pycbc_page_segments --help
+      - pycbc_page_segplot --help
+      - pycbc_page_segtable --help
+      - pycbc_page_sensitivity --help
+      - pycbc_page_snglinfo --help
+      - pycbc_page_snrchi --help
+      - pycbc_page_snrifar --help
+      - pycbc_page_snrratehist --help
+      - pycbc_page_vetotable --help
+      - pycbc_plot_background_coincs --help
+      - pycbc_plot_bank_bins --help
+      - pycbc_plot_chigram --help
+      - pycbc_plot_gating --help
+      - pycbc_plot_hist --help
+      - pycbc_plot_hwinj --help
+      - pycbc_plot_psd_file --help
+      - pycbc_plot_psd_timefreq --help
+      - pycbc_plot_qscan --help
+      - pycbc_plot_range --help
+      - pycbc_plot_range_vs_mtot --help
+      - pycbc_plot_singles_timefreq --help
+      - pycbc_plot_singles_vs_params --help
+      - pycbc_plot_throughput --help
+      - pycbc_plot_trigger_timeseries --help
+      - pycbc_plot_trigrate --help
+      - pycbc_plot_vt_ratio --help
+      - pycbc_plot_waveform --help
+      - pycbc_population_plots --help
+      - pycbc_population_rates --help
+      - pycbc_process_sngls --help
+      - pycbc_pygrb_plot_chisq_veto --help
+      - pycbc_pygrb_plot_coh_ifosnr --help
+      - pycbc_pygrb_plot_skygrid --help
+      - pycbc_pygrb_plot_snr_timeseries --help
+      - pycbc_pygrb_results_workflow --help
+      - pycbc_randomize_inj_dist_by_optsnr --help
+      - pycbc_reduce_template_bank --help
+      - pycbc_rerank_passthrough --help
+      - pycbc_single_template --help
+      - pycbc_single_template_plot --help
+      - pycbc_sngl_minifollowup --help
+      - pycbc_split_inspinj --help
+      - pycbc_splitbank --help
+      - pycbc_strip_injections --help
+      - pycbc_template_recovery_hist --help
+      - pycbc_tmpltbank_to_chi_params --help
+      - pycbc_upload_xml_to_gracedb --help
+      - run_pycbc_inference --help
+
+about:
+  summary: Core library to analyze gravitational-wave data, find signals, and study their parameters.
+  description: |
+    PyCBC is a software package used to explore astrophysical sources
+    of gravitational waves.
+    It contains algorithms that can detect coalescing compact binaries
+    and measure the astrophysical parameters of detected sources.
+    PyCBC was used in the first direct detection of gravitational
+    waves (GW150914) by LIGO and is used in the ongoing analysis of
+    LIGO and Virgo data.
+  homepage: https://pycbc.org/
+  repository: https://github.com/gwastro/pycbc/
+  documentation: http://pycbc.org/pycbc/latest/html/
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - ahnitz
+    - duncanmmacleod
+    - maxtrevor
+    - spxiwh
+    - titodalcanton
