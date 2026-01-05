@@ -154,6 +154,8 @@ tests:
         - if: x86_64
           then: mkl
     script:
+      # Skip test_bhspec.py (see https://github.com/gwastro/pycbc/issues/5246)
+      - "export PYTEST_ADDOPTS=\"--ignore test/test_bhspec.py\""
       # Skip test_fft_mkl_threaded.py on non-x86_64 platforms
       - if: unix and not x86_64
         then: "export PYTEST_ADDOPTS=\"${PYTEST_ADDOPTS:-} --ignore test/test_fft_mkl_threaded.py\""
