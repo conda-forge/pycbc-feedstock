@@ -139,8 +139,9 @@ tests:
       pip_check: true
   - files:
       source:
-        - test
+        - examples
         - pytest.ini
+        - test
     requirements:
       run:
         - epsie
@@ -149,14 +150,15 @@ tests:
         - openssh
         - pip
         - pytest
+        - pytest-xdist
         - if: x86_64
           then: mkl
     script:
       # Skip test_fft_mkl_threaded.py on non-x86_64 platforms
       - if: unix and not x86_64
-        then: "export PYTEST_ADDOPTS=\"--ignore test/test_fft_mkl_threaded.py\""
+        then: "export PYTEST_ADDOPTS=\"${PYTEST_ADDOPTS:-} --ignore test/test_fft_mkl_threaded.py\""
       # Run test suite
-      - python -m pytest
+      - python -m pytest test/ -n ${{ env.get("CPU_COUNT", default="1") }}
       # Check that command-line scripts are functional
       - "export MPLBACKEND=\"agg\""
       - pycbc_aligned_bank_cat --help
