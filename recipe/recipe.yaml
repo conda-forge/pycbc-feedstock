@@ -44,6 +44,8 @@ build:
   script: ${{ PYTHON }} -m pip install . -vv
   skip:
     - win
+    # Match upstream Requires-Python
+    - match(python, "<3.11")
 
 requirements:
   build:
