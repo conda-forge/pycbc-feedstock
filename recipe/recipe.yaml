@@ -2,15 +2,15 @@ schema_version: 1
 
 context:
   name: PyCBC
-  version: 2.9.0
+  version: "2.10.0"
 
 package:
   name: ${{ name|lower }}
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
-  sha256: f9bf981814d6d522ad0c9affadcfd3f3d2ea8422b047d70755b06c03c08e342e
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name | lower }}-${{ version }}.tar.gz
+  sha256: 3c1034e4089d256936c4d80f9c1fa1348c1ff604357a47a4beffbcac2c135edf
   patches:
     # to update the patches for a new release:
     #
@@ -40,10 +40,12 @@ source:
 build:
   dynamic_linking:
     overlinking_behavior: error
-  number: 1
+  number: 0
   script: ${{ PYTHON }} -m pip install . -vv
   skip:
     - win
+    # Match upstream Requires-Python
+    - match(python, "<3.11")
 
 requirements:
   build:
