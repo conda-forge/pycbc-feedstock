@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "2.10.0"
+  version: "2.11.0"
   cpu_count: ${{ env.get('CPU_COUNT', default='1') | int }}
 
 package:
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://files.pythonhosted.org/packages/source/P/PyCBC/pycbc-${{ version }}.tar.gz
-  sha256: 3c1034e4089d256936c4d80f9c1fa1348c1ff604357a47a4beffbcac2c135edf
+  sha256: 1d37a6cd6c9d85d0c09dd3834f1c5a98d3710dafdfc902d3986ffea8b5aef68d
   patches:
     # to update the patches for a new release:
     #
@@ -38,7 +38,7 @@ source:
     - patches/0003-ignore-tests-that-rely-on-external-data-files.patch
 
 build:
-  number: 1
+  number: 0
   script: ${{ PYTHON }} -m pip install . -vv
   skip:
     - win
