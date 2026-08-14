@@ -40,7 +40,7 @@ source:
 build:
   dynamic_linking:
     overlinking_behavior: error
-  number: 0
+  number: 1
   script: ${{ PYTHON }} -m pip install . -vv
   skip:
     - win
@@ -89,7 +89,6 @@ requirements:
     - python
     - python-lalframe
     - python-lalsimulation
-    - python-ligo-lw >=1.8.1
     - scipy >=0.16.0
     - setuptools
     - sympy
