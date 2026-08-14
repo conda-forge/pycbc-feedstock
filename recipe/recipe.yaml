@@ -39,7 +39,7 @@ source:
 
 build:
   dynamic_linking:
-    overlinking_behavior: error
+    overdepending_behavior: error
   number: 1
   script: ${{ PYTHON }} -m pip install . -vv
   skip:
