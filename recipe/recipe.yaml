@@ -52,6 +52,8 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - ${{ stdlib('c') }}
+    - if: linux
+      then: libgomp
     - if: build_platform != target_platform
       then:
         - python
@@ -64,8 +66,6 @@ requirements:
     - pip
     - python
     - setuptools
-    - if: linux
-      then: libgomp
   run:
     - astropy-base !=4.0.5,!=4.2.1,>=2.0.3
     - beautifulsoup4 >=4.6.0
