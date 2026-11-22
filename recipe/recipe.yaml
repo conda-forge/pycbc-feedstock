@@ -69,14 +69,14 @@ requirements:
     - cython >=0.29
     - gwdatafind
     - h5py >=3.0.0,!=3.7.0
-    - igwn-ligolw
+    - igwn-ligolw >=2.1.0
     - igwn-segments
     - jinja2
     - lscsoft-glue >=1.59.3
     - mako >=1.0.1
     - matplotlib-base >=2.0.0
     - mpld3 >=0.3
-    - numpy >=1.16.0,!=1.19.0,!=2.2.2
+    - numpy >=1.16.0,!=1.19.0,!=2.2.2,<2.4
     - pegasus-wms.api >=5.1.1
     - pkg-config
     - pillow
@@ -84,7 +84,7 @@ requirements:
     - python
     - python-lalframe
     - python-lalsimulation
-    - scipy >=0.16.0
+    - scipy >=0.16.0,<1.17.0a0
     - setuptools
   run_constraints:
     - liblalmetaio !=2.1.0
