@@ -144,6 +144,7 @@ tests:
         - openssh
         - pytest
         - pytest-xdist
+        - python-lalmetaio
         - if: x86_64
           then: mkl
     script:
