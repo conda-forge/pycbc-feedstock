@@ -2,6 +2,7 @@ schema_version: 1
 
 context:
   version: "2.10.0"
+  cpu_count: ${{ env.get('CPU_COUNT', default='1') | int }}
 
 package:
   name: pycbc
@@ -158,8 +159,11 @@ tests:
         then: "export PYTEST_ADDOPTS=\"${PYTEST_ADDOPTS:-} --ignore test/test_fft_mkl_threaded.py\""
 
       # Run test suite
+      - if: cpu_count > 1
+        then: "export PYTEST_ADDOPTS=\"${PYTEST_ADDOPTS:-} -n ${{ cpu_count }}\""
+      - export PYTEST_ADDOPTS="${PYTEST_ADDOPTS:-} --durations=10 -ra -v"
       - echo "PYTEST_ADDOPTS=${PYTEST_ADDOPTS:-}"
-      - python -m pytest test/ -n ${{ env.get("CPU_COUNT", default="1") }}
+      - python -m pytest test/
 
       # Check that command-line scripts are functional
       # Notes:
