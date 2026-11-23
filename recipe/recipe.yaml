@@ -141,6 +141,7 @@ tests:
         - dynesty <3.0.0a0
         - epsie
         - fftw
+        - hdf5 <2.0.0a0
         - ligo-gracedb >=2.10.0
         - mpi4py
         - openssh
