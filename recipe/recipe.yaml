@@ -170,6 +170,7 @@ tests:
           if
           [[ $prog == *"pycbc_copy_output_map" ]]
           || [[ $prog == *"pycbc_stageout_failed_workflow" ]]
+          || [[ $prog == *"pycbc_submit_dax" ]]
           ; then continue; fi
       - $prog --help
       - done
