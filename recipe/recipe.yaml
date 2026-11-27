@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "2.11.0"
+  version: "2.12.1"
   cpu_count: ${{ env.get('CPU_COUNT', default='1') | int }}
 
 package:
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://files.pythonhosted.org/packages/source/P/PyCBC/pycbc-${{ version }}.tar.gz
-  sha256: 1d37a6cd6c9d85d0c09dd3834f1c5a98d3710dafdfc902d3986ffea8b5aef68d
+  sha256: 339c3ca64eca5c59e1ffe5b7b7c9a6aa1e93dd17b216af86c49603551dfe80ee
   patches:
     # to update the patches for a new release:
     #
